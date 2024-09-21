@@ -3,9 +3,7 @@ package com.example.demu.global.security.jwt;
 import com.example.demu.domain.auth.domain.RefreshToken;
 import com.example.demu.domain.auth.domain.repository.RefreshTokenRepository;
 import com.example.demu.global.security.TokenResponse;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -85,7 +83,7 @@ public class JwtProvider {
         Claims claims = getbody(token);
         Date now = new Date();
         if(claims.getExpiration().before(new Date())){
-            throw new RuntimeException();
+            throw new JwtException("Expired JWT token");
         }
     }
 }
