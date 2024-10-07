@@ -3,11 +3,17 @@ package com.example.demu.domain.user.domain;
 import com.example.demu.domain.user.domain.type.Grade;
 import com.example.demu.domain.user.domain.type.Major;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Entity
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class User {
     @Id
     @Column(nullable = false,columnDefinition = "VARCHAR(60)")

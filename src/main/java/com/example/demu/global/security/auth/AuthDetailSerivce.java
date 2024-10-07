@@ -1,6 +1,6 @@
 package com.example.demu.global.security.auth;
 
-import com.example.demu.domain.user.domain.User;
+import com.example.demu.domain.user.domain.Usexr;
 import com.example.demu.domain.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +15,7 @@ public class AuthDetailSerivce implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String accountId) throws UsernameNotFoundException {
-        User user = userRepository.findByAccountId(accountId)
+        Usexr user = userRepository.findByAccountId(accountId)
                 .orElseThrow(() -> new UsernameNotFoundException(accountId));
 
         return new AuthDetail(user);
