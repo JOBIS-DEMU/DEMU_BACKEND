@@ -9,5 +9,5 @@ public enum Major {
     EMBEDDED,
     FLUTTER,
     AI,
-    FULL_STACK;
+    FULL_STACK
 }

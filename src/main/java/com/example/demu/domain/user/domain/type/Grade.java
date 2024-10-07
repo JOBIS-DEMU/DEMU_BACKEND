@@ -5,5 +5,5 @@ public enum Grade {
     SILVER,
     GOLD,
     PLATINUM,
-    DIAMOND;
+    DIAMOND
 }
