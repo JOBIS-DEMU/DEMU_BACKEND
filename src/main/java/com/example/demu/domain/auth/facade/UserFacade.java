@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserFacade {
-    public UserRepository userRepository;
 
+    public UserRepository userRepository;
 
     public void CheckByaccountId(String accountId) {
         if(userRepository.findByAccountId(accountId).isPresent()){
