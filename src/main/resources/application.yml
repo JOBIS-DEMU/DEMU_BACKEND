@@ -20,7 +20,7 @@ redis:
   host: ${REDIS_HOST}
 
 jwt:
-  secret_key: ${SECRET_KEY:qweiouryiquyweruwqyhaczvzbadhfjasdhfjkaeuyiohkjahsdfkjhab}
+  secret_key: ${SECRET_KEY:asdfqweiouryiquyweruwqyhaczvzbadhfjasdhfjkaeuyiohkjahsdfkjhab}
   access_exp: ${ACCESS_EXP:12000}
   refresh_exp: ${REFRESH_EXP:24000}
   header: ${HEADER:Authorize}
