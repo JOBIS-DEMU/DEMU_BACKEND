@@ -4,6 +4,8 @@ import com.example.demu.domain.auth.controller.dto.SignUpRequest;
 import com.example.demu.domain.auth.facade.UserFacade;
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.repository.UserRepository;
+import com.example.demu.domain.user.domain.type.Grade;
+import com.example.demu.domain.user.domain.type.Major;
 import com.example.demu.global.security.TokenResponse;
 import com.example.demu.global.security.jwt.JwtProvider;
 import com.example.demu.global.security.jwt.JwtReissueUtil;
@@ -29,6 +31,8 @@ public TokenResponse execute(SignUpRequest signUpRequest) {
                     .accountId(signUpRequest.getAccountId())
                     .nickname(signUpRequest.getNickname())
                     .password(signUpRequest.getPassword())
+                    .grade(Grade.BRONZE)
+                    .major(Major.NONE)
                     .build()
     );
 
