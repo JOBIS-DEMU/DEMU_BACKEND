@@ -2,12 +2,13 @@ package com.example.demu.domain.user.domain;
 
 import com.example.demu.domain.user.domain.type.Grade;
 import com.example.demu.domain.user.domain.type.Major;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+
+import javax.persistence.*;
 
 @Getter
 @Entity
