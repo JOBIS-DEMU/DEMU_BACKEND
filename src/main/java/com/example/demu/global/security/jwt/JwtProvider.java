@@ -4,11 +4,10 @@ import com.example.demu.domain.auth.domain.RefreshToken;
 import com.example.demu.domain.auth.domain.repository.RefreshTokenRepository;
 import com.example.demu.global.security.TokenResponse;
 import io.jsonwebtoken.*;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @RequiredArgsConstructor

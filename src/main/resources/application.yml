@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/demu}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:1234}
 
   jpa:
     database: mysql
@@ -14,10 +14,10 @@ spring:
 
   jackson:
     property-naming-strategy: SNAKE_CASE
-
-redis:
-  port: ${REDIS_PORT}
-  host: ${REDIS_HOST}
+#
+#redis:
+#  port: ${REDIS_PORT}
+#  host: ${REDIS_HOST}
 
 jwt:
   secret_key: ${SECRET_KEY:qweiouryiquyweruwqyhaczvzbadhfjasdhfjkaeuyiohkjahsdfkjhab}
@@ -26,8 +26,8 @@ jwt:
   header: ${HEADER:Authorize}
   prefix: ${PREFIX:Bearer}
 
-sentry:
-  dsn: ${SENTRY_DSN}
-  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
-  # We recommend adjusting this value in production.
-  traces-sample-rate: 1.0
+#sentry: 오류 좀더 잘잡아주는거
+#  dsn: ${SENTRY_DSN}
+#  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
+#  # We recommend adjusting this value in production.
+#  traces-sample-rate: 1.0

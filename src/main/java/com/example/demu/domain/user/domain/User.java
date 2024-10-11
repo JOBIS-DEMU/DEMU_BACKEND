@@ -42,5 +42,4 @@ public class User {
     @Column(nullable = false)
     @ColumnDefault("0") // DB 에 들어갈 컬럼의 초기값 설정.
     private long point;
-
 }
