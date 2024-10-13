@@ -6,21 +6,20 @@ import com.example.demu.domain.auth.service.SignInService;
 import com.example.demu.domain.auth.service.SignUpService;
 import com.example.demu.global.security.TokenResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/public")
 public class AuthController {
 
     private final SignUpService signUpService;
     private final SignInService signInService;
 
-    @PostMapping("public/signup")
+    @PostMapping("signup")
     public TokenResponse SignUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         return signUpService.execute(signUpRequest);
     }

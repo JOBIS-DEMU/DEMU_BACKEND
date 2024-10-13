@@ -1,8 +1,10 @@
 package com.example.demu.domain.auth.controller.dto;
 
-import jakarta.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @NoArgsConstructor
