@@ -10,6 +10,7 @@ import com.example.demu.global.security.TokenResponse;
 import com.example.demu.global.security.jwt.JwtProvider;
 import com.example.demu.global.security.jwt.JwtReissueUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -20,8 +21,9 @@ public class SignUpService {
     private final JwtProvider jwtProvider;
     private final UserFacade userFacade;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-public TokenResponse execute(SignUpRequest signUpRequest) {
+    public TokenResponse execute(SignUpRequest signUpRequest) {
     //최초 유저 생성시 비활성화 해야함 (nullPointerException 뜸)
     userFacade.CheckByaccountId(signUpRequest.getAccountId());
 
@@ -29,7 +31,7 @@ public TokenResponse execute(SignUpRequest signUpRequest) {
             User.builder()
                     .accountId(signUpRequest.getAccountId())
                     .nickname(signUpRequest.getNickname())
-                    .password(signUpRequest.getPassword())
+                    .password(passwordEncoder.encode(signUpRequest.getPassword()))
                     .grade(Grade.BRONZE)
                     .major(Major.NONE)
                     .build()
