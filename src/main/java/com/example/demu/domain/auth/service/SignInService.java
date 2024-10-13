@@ -3,7 +3,7 @@ package com.example.demu.domain.auth.service;
 import com.example.demu.domain.auth.controller.dto.SignInRequest;
 import com.example.demu.domain.auth.exception.PasswordMisMatchException;
 import com.example.demu.domain.user.domain.User;
-import com.example.demu.domain.user.domain.exception.UserNotFoundException;
+import com.example.demu.domain.user.exception.UserNotFoundException;
 import com.example.demu.domain.user.domain.repository.UserRepository;
 import com.example.demu.global.security.TokenResponse;
 import com.example.demu.global.security.jwt.JwtProvider;
