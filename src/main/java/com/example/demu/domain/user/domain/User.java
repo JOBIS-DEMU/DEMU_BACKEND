@@ -21,7 +21,6 @@ public class User {
     private String accountId;
 
     //게시물 번호(post_id) 추가해야함.
-
     @Column(nullable = false,columnDefinition = "VARCHAR(50)")
     private String nickname;
 

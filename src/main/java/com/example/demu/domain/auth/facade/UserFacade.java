@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 public class UserFacade {
     public final UserRepository userRepository;
 
-
     public void CheckByaccountId(String accountId) {
         if(userRepository.findByAccountId(accountId).isPresent()){
             throw new RuntimeException("User already exists");

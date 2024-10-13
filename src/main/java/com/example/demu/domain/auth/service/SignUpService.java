@@ -15,12 +15,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class SignUpService {
+
     private final JwtReissueUtil jwtReissueUtil;
     private final JwtProvider jwtProvider;
     private final UserFacade userFacade;
     private final UserRepository userRepository;
-
-
 
 public TokenResponse execute(SignUpRequest signUpRequest) {
     //최초 유저 생성시 비활성화 해야함 (nullPointerException 뜸)
@@ -38,6 +37,4 @@ public TokenResponse execute(SignUpRequest signUpRequest) {
 
     return jwtProvider.createToken(signUpRequest.getAccountId());
     }
-
-
 }
