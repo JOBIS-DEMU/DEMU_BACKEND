@@ -9,15 +9,15 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
 
   jackson:
     property-naming-strategy: SNAKE_CASE
-#
-#redis:
-#  port: ${REDIS_PORT}
-#  host: ${REDIS_HOST}
+
+redis:
+  port: ${REDIS_PORT:6379}
+  host: ${REDIS_HOST:localhost}
 
 jwt:
   secret_key: ${SECRET_KEY:qweiouryiquyweruwqyhaczvzbadhfjasdhfjkaeuyiohkjahsdfkjhab}
@@ -26,7 +26,7 @@ jwt:
   header: ${HEADER:Authorize}
   prefix: ${PREFIX:Bearer}
 
-#sentry: 오류 좀더 잘잡아주는거
+#sentry: 레이더
 #  dsn: ${SENTRY_DSN}
 #  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
 #  # We recommend adjusting this value in production.

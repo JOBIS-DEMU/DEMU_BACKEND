@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserFacade {
-    public UserRepository userRepository;
+    public final UserRepository userRepository;
 
 
     public void CheckByaccountId(String accountId) {
