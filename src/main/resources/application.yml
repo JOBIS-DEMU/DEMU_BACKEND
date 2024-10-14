@@ -31,3 +31,17 @@ sentry:
   # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
   # We recommend adjusting this value in production.
   traces-sample-rate: 1.0
+
+cloud:
+  aws:
+    credentials:
+      accessKey: ${AWS_ACCESS_KEY}
+      secretKey: ${AWS_SECRET_KEY}
+    s3:
+      bucket: demu-s3-bucket
+    region:
+      static: ap-northeast-2
+
+  stack:
+    auto: false
+
