@@ -1,17 +1,17 @@
 package com.example.demu.domain.user.domain.type;
 
 public enum Major {
-    backend,
-    frontend,
-    iOS,
+    BACKEND,
+    FRONTEND,
+    IOS,
     AOS,
-    devops,
-    embedded,
-    flutter,
+    DEVOPS,
+    EMBEDDED,
+    FLUTTER,
     AI,
-    full_stack,
-    security,
-    game,
+    FULL_STACK,
+    SECURITY,
+    GAME,
     ETC,
     DESIGN,
     NONE;
