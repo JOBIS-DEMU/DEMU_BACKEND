@@ -1,4 +1,4 @@
-package com.example.demu.domain.image;
+package com.example.demu.infra.service;
 
 
 import com.amazonaws.services.s3.AmazonS3;
