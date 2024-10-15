@@ -1,4 +1,4 @@
-package com.example.demu.global.config;
+package com.example.demu.infra.config;
 
 
 import com.amazonaws.auth.AWSCredentials;

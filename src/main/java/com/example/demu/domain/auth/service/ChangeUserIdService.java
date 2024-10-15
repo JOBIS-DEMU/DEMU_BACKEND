@@ -15,6 +15,6 @@ public class ChangeUserIdService {
 
     public void changeUserId(ChangeUserIdRequest request) {
         User user = userRepository.findByAccountId(request.getAccountId())
-                .orElseThrow(() -> new UserNotFoundException.EXCEPTION;
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 }
