@@ -1,4 +1,4 @@
-package com.example.demu.domain.user.domain.exception;
+package com.example.demu.domain.user.exception;
 
 import com.example.demu.global.error.exception.DemuException;
 import com.example.demu.global.error.exception.ErrorCode;
