@@ -19,7 +19,7 @@ public class SignUpRequest {
     private String accountId;
 
     @NotEmpty(message = "nickname 는 null 이거나 공백을 허용하지 않습니다.")
-    @Size(min = 3, max = 10,message = "nickname 는 3글자 이상 20글자 이하여야 합니다.")
+    @Size(min = 3, max = 10,message = "nickname 는 2글자 이상 10글자 이하여야 합니다.")
     private String nickname;
 
     @NotBlank(message = "password 는 null 이거나 공백, 뛰어쓰기를 허용하지 않습니다.")
