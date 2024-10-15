@@ -5,6 +5,7 @@ import com.example.demu.domain.auth.controller.dto.SignUpRequest;
 import com.example.demu.domain.auth.service.ChangeUserIdService;
 import com.example.demu.domain.auth.service.SignInService;
 import com.example.demu.domain.auth.service.SignUpService;
+import com.example.demu.domain.auth.service.VaildateEmailService;
 import com.example.demu.global.security.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ public class AuthController {
 
     private final SignUpService signUpService;
     private final SignInService signInService;
+    private final VaildateEmailService vaildateEmailService;
     private final ChangeUserIdService changeUserIdService;;
 
     @PostMapping("signup")
@@ -31,6 +33,13 @@ public class AuthController {
     public TokenResponse signin(@RequestBody @Valid SignInRequest signInRequest) {
         return signInService.signIn(signInRequest);
     }
+
+    @PostMapping("/vaildate/email")
+    public String vaildateEmail(@RequestParam String email) {
+       return vaildateEmailService.vaildateEmail(email);
+    }
+
+
 
 /*
     @PostMapping("/test")
