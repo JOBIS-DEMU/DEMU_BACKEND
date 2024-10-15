@@ -1,6 +1,5 @@
 package com.example.demu.domain.auth.controller.dto;
 
-
 import lombok.Builder;
 import lombok.Getter;
 
