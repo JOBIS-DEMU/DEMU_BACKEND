@@ -23,7 +23,6 @@ public class JwtProvider {
                 .build();
     }
 
-
     public String createAccessToken(String accountId){
         Claims claims = Jwts.claims().setSubject(accountId);
         Date now = new Date();
@@ -35,7 +34,6 @@ public class JwtProvider {
                         .setExpiration(new Date(now.getTime() + jwtProperties.getAccessExp()*1000))
                         .compact();
     }
-
 
     public String createRefreshToken(String accountId){
         Date now = new Date();
@@ -62,14 +60,16 @@ public class JwtProvider {
     public String resolveToken(HttpServletRequest request){
 
         String bearerToken = request.getHeader(jwtProperties.getHeader());
+        System.out.println("bearerToken: " + bearerToken);
 
         if(bearerToken != null && bearerToken.startsWith(jwtProperties.getPrefix())
-        && bearerToken.length() > jwtProperties.getPrefix().length()+1){
-            return bearerToken.substring(jwtProperties.getPrefix().length()+1);
+        && bearerToken.length() > jwtProperties.getPrefix().length()){
+            System.out.println("aaaa");
+            return bearerToken.substring(jwtProperties.getPrefix().length()).trim();
         }
+        System.out.println("bbbb");
         return null;
     }
-
 
     public Claims getbody(String token){
         try {
@@ -79,10 +79,8 @@ public class JwtProvider {
         }
     }
 
-
     public void ValidateToken(String token){
         Claims claims = getbody(token);
-        Date now = new Date();
         if(claims.getExpiration().before(new Date())){
             throw new JwtException("Expired JWT token");
         }

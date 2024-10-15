@@ -52,11 +52,7 @@ public class JwtReissueUtil {
 
     //클래임 받아서 리프레시 토큰인지 확인
     public boolean isRefreshToken(String refreshToken) {
-        Claims refreshBody = getPayload(refreshToken);
-        if(refreshBody.get("type").equals("refresh")){
-            return true;
-        }
-        return false;
+        return getPayload(refreshToken).get("type").equals("refresh");
     }
 
     public String getTokenAccountId(String token) {
