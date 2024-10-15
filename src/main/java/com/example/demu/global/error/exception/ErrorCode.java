@@ -9,7 +9,9 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 
     USER_NOT_FOUND(404, "User Not Found"),
-    PASSWORD_MISMATCH(401, "Password Mismatch");
+    PASSWORD_MISMATCH(401, "Password Mismatch"),
+
+    POST_NOT_FOUND(404, "Post Not Found");
 
     private final int status;
     private final String message;
