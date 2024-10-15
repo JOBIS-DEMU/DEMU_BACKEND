@@ -26,6 +26,19 @@ jwt:
   header: ${HEADER:Authorize}
   prefix: ${PREFIX:Bearer}
 
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL:cmd081119@gmail.com}
+    password: ${PASSWORD:cuth uyaz tggw qkhf}
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: ture
+          auth: ture
+
 #sentry: 레이더
 #  dsn: ${SENTRY_DSN}
 #  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
