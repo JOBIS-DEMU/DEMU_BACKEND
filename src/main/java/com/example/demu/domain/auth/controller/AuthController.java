@@ -2,6 +2,7 @@ package com.example.demu.domain.auth.controller;
 
 import com.example.demu.domain.auth.controller.dto.SignInRequest;
 import com.example.demu.domain.auth.controller.dto.SignUpRequest;
+import com.example.demu.domain.auth.service.ChangeUserIdService;
 import com.example.demu.domain.auth.service.SignInService;
 import com.example.demu.domain.auth.service.SignUpService;
 import com.example.demu.global.security.TokenResponse;
@@ -18,6 +19,7 @@ public class AuthController {
 
     private final SignUpService signUpService;
     private final SignInService signInService;
+    private final ChangeUserIdService changeUserIdService;;
 
     @PostMapping("signup")
     public TokenResponse SignUp(@RequestBody @Valid SignUpRequest signUpRequest) {
@@ -29,4 +31,11 @@ public class AuthController {
     public TokenResponse signin(@RequestBody @Valid SignInRequest signInRequest) {
         return signInService.signIn(signInRequest);
     }
+
+/*
+    @PostMapping("/test")
+    @ResponseStatus(HttpStatus.OK)
+    public String tset() {
+        return changeUserIdService.changeUserId();
+    }*/
 }

@@ -9,7 +9,7 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
 
   jackson:
@@ -23,11 +23,16 @@ jwt:
   secret_key: ${SECRET_KEY:asdfqweiouryiquyweruwqyhaczvzbadhfjasdhfjkaeuyiohkjahsdfkjhab}
   access_exp: ${ACCESS_EXP:12000}
   refresh_exp: ${REFRESH_EXP:24000}
-  header: ${HEADER:Authorize}
+  header: ${HEADER:Authorization}
   prefix: ${PREFIX:Bearer}
 
-#sentry: 레이더
-#  dsn: ${SENTRY_DSN}
-#  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
-#  # We recommend adjusting this value in production.
-#  traces-sample-rate: 1.0
+#Authorize
+
+logging:
+  level:
+    com.example: DEBUG #패키지 내의 모든 클래스에 대해 로깅 수준을 DEBUG로 설정
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace

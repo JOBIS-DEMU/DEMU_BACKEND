@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.PostConstruct;
+import java.util.Base64;
+
 @Getter
 @Configuration
 public class JwtProperties {
@@ -21,4 +24,9 @@ public class JwtProperties {
 
     @Value("${jwt.secret_key}")
     private String secretKey;
+
+    @PostConstruct
+    private void encodingSecretKey(){
+        Base64.getEncoder().encodeToString(this.secretKey.getBytes());
+    }
 }
