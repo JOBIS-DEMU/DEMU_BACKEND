@@ -15,7 +15,7 @@ public class ChangeUserIdService {
     private final UserRepository userRepository;
     private final UserFacade userFacade;
 
-    public String changeUserId() {
+    public void changeUserId() {
 
         userFacade.getCurrentUser();
 
