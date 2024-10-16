@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  S3_BUCKET_NAME: cointalk-deploy
+  S3_BUCKET_NAME: demu-deploy
 
 jobs:
   build:
@@ -28,13 +28,23 @@ jobs:
     
     - name: Build with Gradle
       run: ./gradlew clean build
-          # 디렉토리 생성
+      
+    # 디렉토리 생성
     - name: Make Directory
       run: mkdir -p deploy
         
     # Jar 파일 복사
     - name: Copy Jar
       run: cp ./build/libs/*.jar ./deploy
+      
+    # appspec.yml 파일 복사
+    - name: Copy appspec.yml
+      run: cp appspec.yml ./deploy
+
+
+    # script files 복사
+    - name: Copy script
+      run: cp ./scripts/*.sh ./deploy
 
     - name: Make zip file
       run: zip -r ./coinTalk.zip ./deploy
@@ -48,5 +58,19 @@ jobs:
         aws-region: ap-northeast-2
 
     - name: Upload to S3
-      run: aws s3 cp --region ap-northeast-2 ./coinTalk.zip s3://demu-deploy/
+      run: aws s3 cp --region ap-northeast-2 ./coinTalk.zip s3://$S3_BUCKET_NAME/
 
+
+
+    # Deploy
+    - name: Deploy
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        aws deploy create-deployment \
+        --application-name DEMU_BACKEND \
+        --deployment-group-name demu-group \
+        --file-exists-behavior OVERWRITE \
+        --s3-location bucket=demu-deploy,bundleType=zip,key=coinTalk.zip \ 
+        --region ap-northeast-2
