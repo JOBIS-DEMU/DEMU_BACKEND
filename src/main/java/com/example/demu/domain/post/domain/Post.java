@@ -2,10 +2,7 @@ package com.example.demu.domain.post.domain;
 
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.type.Major;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
+@Getter
 public class Post {
 
     @Id

@@ -1,4 +1,4 @@
-package com.example.demu.domain.post.Facade;
+package com.example.demu.domain.post.facade;
 
 import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.post.domain.repository.PostRepository;

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreatePostRequest {
 
-    private String accountId;
     private String title;
     private String content;
     private Major major;
