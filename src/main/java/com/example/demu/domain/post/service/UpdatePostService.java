@@ -4,7 +4,6 @@ import com.example.demu.domain.auth.facade.UserFacade;
 import com.example.demu.domain.post.exception.CannotModifyFeedException;
 import com.example.demu.domain.post.facade.PostFacade;
 import com.example.demu.domain.post.domain.Post;
-import com.example.demu.domain.post.domain.repository.PostRepository;
 import com.example.demu.domain.post.dto.request.UpdatePostRequest;
 import com.example.demu.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UpdatePostService {
 
-    private final PostRepository postRepository;
     private final UserFacade userFacade;
     private final PostFacade postFacade;
 
