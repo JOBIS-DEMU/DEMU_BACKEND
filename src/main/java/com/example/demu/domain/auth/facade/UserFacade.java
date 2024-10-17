@@ -1,5 +1,6 @@
 package com.example.demu.domain.auth.facade;
 
+import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,4 @@ public class UserFacade {
             throw new RuntimeException("User already exists");
         }
     }
-
 }

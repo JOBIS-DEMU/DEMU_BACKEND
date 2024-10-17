@@ -41,4 +41,11 @@ public class Post {
 
     @Enumerated(EnumType.STRING)
     private Major major;
+
+    public void updatePost(String title, String content, Major major) {
+        this.title = title;
+        this.content = content;
+        this.major = major;
+    }
+
 }
