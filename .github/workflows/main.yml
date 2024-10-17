@@ -65,12 +65,13 @@ jobs:
     # Deploy
     - name: Deploy
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
       run: |
         aws deploy create-deployment \
-        --application-name DEMU_BACKEND \
+        --application-name demu \
         --deployment-group-name demu-group \
         --file-exists-behavior OVERWRITE \
-        --s3-location bucket=demu-deploy,bundleType=zip,key=coinTalk.zip \ 
+        --s3-location bucket=demu-deploy,bundleType=zip,key=coinTalk.zip \
         --region ap-northeast-2
+
