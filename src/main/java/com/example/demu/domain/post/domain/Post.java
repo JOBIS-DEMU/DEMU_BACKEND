@@ -2,16 +2,14 @@ package com.example.demu.domain.post.domain;
 
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.type.Major;
-import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Table(name = "tbl_user")
 @Entity

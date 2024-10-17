@@ -2,8 +2,9 @@ package com.example.demu.domain.comment.domain;
 
 import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.user.domain.User;
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tbl_comment")
