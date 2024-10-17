@@ -5,10 +5,11 @@ import com.example.demu.domain.post.dto.request.UpdatePostRequest;
 import com.example.demu.domain.post.service.CreatePostService;
 import com.example.demu.domain.post.service.DeletePostService;
 import com.example.demu.domain.post.service.UpdatePostService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RequestMapping("/post")

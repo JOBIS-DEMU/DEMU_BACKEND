@@ -11,7 +11,8 @@ public enum ErrorCode {
     USER_NOT_FOUND(404, "User Not Found"),
     PASSWORD_MISMATCH(401, "Password Mismatch"),
 
-    POST_NOT_FOUND(404, "Post Not Found");
+    POST_NOT_FOUND(404, "Post Not Found"),
+    CANNOT_MODIFY_POST(403, "Cannot Modify Post");
 
     private final int status;
     private final String message;
