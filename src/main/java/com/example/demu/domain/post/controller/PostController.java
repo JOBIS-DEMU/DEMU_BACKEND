@@ -1,4 +1,4 @@
-package com.example.demu.domain.post.domain;
+package com.example.demu.domain.post.controller;
 
 import com.example.demu.domain.post.dto.request.CreatePostRequest;
 import com.example.demu.domain.post.dto.request.UpdatePostRequest;
@@ -21,11 +21,10 @@ public class PostController {
     private final UpdatePostService updatePostService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
+    @PostMapping("/create")
     public void createPost(@RequestBody @Valid CreatePostRequest request){
         createPostService.createPost(request);
     }
-
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{post-id}")
@@ -33,10 +32,9 @@ public class PostController {
         deletePostService.deletePost(id);
     }
 
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/{post-id}")
-    public void updatePost(@PathVariable("post-id") Long id, UpdatePostRequest request){
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping("/{post-id}")
+    public void updatePost(@PathVariable("post-id") Long id, @RequestBody @Valid UpdatePostRequest request){
         updatePostService.updatePost(id, request);
     }
 }
