@@ -54,6 +54,14 @@ dependencies {
 
 }
 
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'main.java.com.exapmple.demu.DemuApplication'
+		)
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

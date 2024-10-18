@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${secret.DB_URL}
-    username: ${secret.DB_USERNAME}
-    password: ${secret.DB_PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   jpa:
     database: mysql
@@ -12,32 +12,26 @@ spring:
       ddl-auto: create #update
     show-sql: true
 
-  jackson:
-    property-naming-strategy: SNAKE_CASE
-
 redis:
-  port: ${secret.REDIS_PORT}
-  host: ${secret.REDIS_HOST}
+  port: ${REDIS_PORT}
+  host: ${REDIS_HOST}
 
 jwt:
-  secret_key: ${secret.SECRET_KEY}
-  access_exp: ${secret.ACCESS_EXP}
-  refresh_exp: ${secret.REFRESH_EXP}
-  header: ${secret.HEADER}
-  prefix: ${secret.PREFIX}
-
-#Authorize
+  secret_key: ${SECRET_KEY}
+  access_exp: ${ACCESS_EXP}
+  refresh_exp: ${REFRESH_EXP}
+  header: ${HEADER}
+  prefix: ${PREFIX}
 
 cloud:
   aws:
     credentials:
-      accessKey: ${secret.AWS_ACCESS_KEY}
-      secretKey: ${secret.AWS_SECRET_KEY}
+      accessKey: ${AWS_ACCESS_KEY}
+      secretKey: ${AWS_SECRET_KEY}
     s3:
       bucket: demu-s3-bucket
     region:
       static: ap-northeast-2
-
 
   mail:
     host: smtp.gmail.com
@@ -48,11 +42,5 @@ cloud:
       mail:
         smtp:
           starttls:
-            enable: ture
-          auth: ture
-
-#sentry: 레이더
-#  dsn: ${SENTRY_DSN}
-#  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
-#  # We recommend adjusting this value in production.
-#  traces-sample-rate: 1.0
+            enable: true
+          auth: true

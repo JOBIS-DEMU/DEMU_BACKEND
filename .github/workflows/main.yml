@@ -8,6 +8,16 @@ on:
 
 env:
   S3_BUCKET_NAME: demu-deploy
+  DB_URL: ${{ secrets.DB_URL }}
+  DB_USERNAME: ${{ secrets.DB_USERNAME }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  REDIS_PORT: ${{ secrets.REDIS_PORT }}
+  REDIS_HOST: ${{ secrets.REDIS_HOST }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  ACCESS_EXP: ${{ secrets.ACCESS_EXP }}
+  REFRESH_EXP: ${{ secrets.REFRESH_EXP }}
+  HEADER: ${{ secrets.HEADER }}
+  PREFIX: ${{ secrets.PREFIX }}
 
 jobs:
   build:
