@@ -19,5 +19,7 @@ public class RecommendService {
                 .orElseThrow(() -> new RuntimeException("게시물을 찾을 수 없습니다."));
 
         post.addRecommend();
+        post.getUser().plusPoint();
     }
+
 }

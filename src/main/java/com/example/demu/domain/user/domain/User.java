@@ -40,7 +40,7 @@ public class User {
 
     @Column(nullable = false)
     @ColumnDefault("0") // DB 에 들어갈 컬럼의 초기값 설정.
-    private long point;
+    private Long point;
 
     public void updateNickname(String nickname) {
         this.nickname = nickname;
@@ -52,5 +52,9 @@ public class User {
 
     public void updateMajor(Major major) {
         this.major = major;
+    }
+
+    public void plusPoint() {
+        this.point += 1;
     }
 }
