@@ -27,13 +27,13 @@ public class PostController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{post-id}")
+    @DeleteMapping("/delete/{post-id}")
     public void deletePost(@PathVariable("post-id") Long id){
         deletePostService.deletePost(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("/{post-id}")
+    @PatchMapping("/update/{post-id}")
     public void updatePost(@PathVariable("post-id") Long id, @RequestBody @Valid UpdatePostRequest request){
         updatePostService.updatePost(id, request);
     }

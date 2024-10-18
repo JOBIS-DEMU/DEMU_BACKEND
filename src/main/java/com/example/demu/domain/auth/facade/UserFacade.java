@@ -5,9 +5,10 @@ import com.example.demu.domain.user.domain.repository.UserRepository;
 import com.example.demu.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class UserFacade {
     public final UserRepository userRepository;
