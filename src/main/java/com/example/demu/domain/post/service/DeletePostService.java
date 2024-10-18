@@ -1,7 +1,7 @@
 package com.example.demu.domain.post.service;
 
 import com.example.demu.domain.auth.facade.UserFacade;
-import com.example.demu.domain.post.Facade.PostFacade;
+import com.example.demu.domain.post.facade.PostFacade;
 import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.post.domain.repository.PostRepository;
 import com.example.demu.domain.post.exception.CannotModifyFeedException;
