@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import javax.persistence.*;
+
 @Getter
 @Entity
 @AllArgsConstructor
@@ -46,4 +48,15 @@ public class User {
     @ColumnDefault("0") // DB 에 들어갈 컬럼의 초기값 설정.
     private long point;
 
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void updateIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public void updateMajor(Major major) {
+        this.major = major;
+    }
 }

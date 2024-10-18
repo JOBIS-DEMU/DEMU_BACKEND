@@ -1,14 +1,16 @@
 package com.example.demu.domain.auth.facade;
 
+import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.repository.UserRepository;
+import com.example.demu.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserFacade {
-
-    public UserRepository userRepository;
+    public final UserRepository userRepository;
 
     public void CheckByaccountId(String accountId) {
         if(userRepository.findByAccountId(accountId).isPresent()){
@@ -16,4 +18,11 @@ public class UserFacade {
         }
     }
 
+    public User CurrentUser() {
+        String accountId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return userRepository.findByAccountId(accountId)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+    }
 }
+
