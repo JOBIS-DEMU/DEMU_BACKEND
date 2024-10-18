@@ -12,7 +12,10 @@ public enum ErrorCode {
     PASSWORD_MISMATCH(401, "Password Mismatch"),
 
     POST_NOT_FOUND(404, "Post Not Found"),
-    CANNOT_MODIFY_POST(403, "Cannot Modify Post");
+    CANNOT_MODIFY_POST(403, "Cannot Modify Post"),
+
+    COMMENT_NOT_FOUND(404, "Comment Not Found"),
+    CANNOT_DELETE_COMMENT(403, "Not Delete Comment");
 
     private final int status;
     private final String message;
