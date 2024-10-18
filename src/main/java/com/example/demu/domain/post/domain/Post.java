@@ -32,7 +32,8 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime date;
 
-    private Long recommend;
+    @Builder.Default
+    private Long recommend = 0L;
 
     @Enumerated(EnumType.STRING)
     private Major major;
@@ -43,4 +44,7 @@ public class Post {
         this.major = major;
     }
 
+    public void addRecommend() {
+        this.recommend += 1;
+    }
 }
