@@ -1,4 +1,4 @@
-name: coinTalk chatRoom server CI/CD
+name: demu server CI/CD
 
 on:
   push:
