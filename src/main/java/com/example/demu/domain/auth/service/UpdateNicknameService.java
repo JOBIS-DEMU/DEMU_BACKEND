@@ -6,9 +6,11 @@ import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UpdateNicknameService {
 
     private final UserRepository userRepository;

@@ -9,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class ReissueSerivce {
+
     private final JwtReissueUtil jwtReissueUtil;
 
     @Transactional
     public TokenResponse reissue(String refreshToken) {
         return jwtReissueUtil.reissueAccessToken(refreshToken);
     }
+
 }

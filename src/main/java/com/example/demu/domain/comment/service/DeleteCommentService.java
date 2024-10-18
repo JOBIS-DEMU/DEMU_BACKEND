@@ -8,6 +8,7 @@ import com.example.demu.domain.comment.facade.CommentFacade;
 import com.example.demu.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ public class DeleteCommentService {
     private final UserFacade userFacade;
     private final CommentFacade commentFacade;
 
+    @Transactional
     public void delete(Long id) {
 
         User user = userFacade.CurrentUser();

@@ -9,6 +9,7 @@ import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class CreateCommentService {
     private final UserFacade userFacade;
     private final PostFacade postFacade;
 
+    @Transactional
     public void create(Long id, CreateCommentRequest request) {
         User user = userFacade.CurrentUser();
         Post post = postFacade.getPost(id);
