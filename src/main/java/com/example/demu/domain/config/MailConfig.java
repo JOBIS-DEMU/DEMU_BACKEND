@@ -17,6 +17,12 @@ public class MailConfig {
         mailSender.setUsername("jeaminruy@gmail.com"); // 이메일 주소
         mailSender.setPassword("cuth uyaz tggw qkhf"); // 비밀번호
 
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.starttls.enable", "true");  // STARTTLS 활성화
+        mailSender.setJavaMailProperties(props);
+
         return mailSender;
     }
 

@@ -5,6 +5,7 @@ import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class FindPwService {
 
         StringBuilder tempPw = new StringBuilder();
 
-        for(int i=0 ; i<charSet.length ; i++) {
+        for(int i=0 ; i<10 ; i++) {
             int idx;
             idx = (int)(charSet.length*Math.random());
             tempPw.append(charSet[idx]);
@@ -47,9 +48,20 @@ public class FindPwService {
 
         FindPwResponse findPwResponse = FindPwResponse.builder()
                 .title("요청하신 임시비밀번호입니다!")
-                .content("보")
+                .content("보안에 유의하여 확인하세요\n"+tempPw)
                 .receivedAddress(email)
                 .build();
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject(findPwResponse.getTitle());
+        message.setText(findPwResponse.getContent());
+
+        user.updatePassword(passwordEncoder.encode(tempPw.toString()));
+
+        userRepository.save(user);
+
+        mailSender.send(message);
 
     }
 

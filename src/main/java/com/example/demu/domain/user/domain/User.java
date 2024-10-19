@@ -62,4 +62,8 @@ public class User {
     public void plusPoint() {
         this.point += 1;
     }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
 }

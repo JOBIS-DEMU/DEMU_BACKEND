@@ -23,7 +23,7 @@ public class AuthController {
 
     private final SignUpService signUpService;
     private final SignInService signInService;
-    private final VaildateEmailService vaildateEmailService;
+    private final FindPwService findPwService;
     private final UpdateMajorService updateMajorService;
     private final UpdateNicknameService updateNicknameService;
     private final UpdateIntroService updateIntroService;
@@ -40,9 +40,9 @@ public class AuthController {
         return signInService.signIn(signInRequest);
     }
 
-    @PostMapping("/vaildate/email")
-    public String vaildateEmail(@RequestParam String email) {
-       return vaildateEmailService.vaildateEmail(email);
+    @GetMapping("password/find/{email}")
+    public void vaildateEmail(@PathVariable String email) {
+       findPwService.findPw(email);
     }
 
     @PatchMapping("/intro")
