@@ -26,6 +26,7 @@ jwt:
   header: ${HEADER:Authorization}
   prefix: ${PREFIX:Bearer}
 
+
 #Authorize
 
 logging:
