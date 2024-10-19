@@ -10,4 +10,5 @@ import javax.validation.constraints.NotNull;
 public class CreateCommentRequest {
 
     private String content;
+    
 }
