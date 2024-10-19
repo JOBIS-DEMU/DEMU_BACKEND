@@ -11,6 +11,7 @@ import com.example.demu.global.security.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -25,6 +26,7 @@ public class AuthController {
     private final UpdateMajorService updateMajorService;
     private final UpdateNicknameService updateNicknameService;
     private final UpdateIntroService updateIntroService;
+    private final UpdateProfileImageService updateProfileImageService;
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
@@ -61,4 +63,8 @@ public class AuthController {
         updateNicknameService.updateNickname(request);
     }
 
+    @PatchMapping("/profile-image")
+    public void updateProfileImage(@RequestParam("images") MultipartFile image){
+        updateProfileImageService.upDateProfile(image);
+    }
 }

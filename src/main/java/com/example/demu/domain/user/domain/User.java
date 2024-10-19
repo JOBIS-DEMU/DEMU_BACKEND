@@ -42,6 +42,8 @@ public class User {
     @ColumnDefault("0") // DB 에 들어갈 컬럼의 초기값 설정.
     private Long point;
 
+    private String profileImage;
+
     public void updateNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -57,4 +59,6 @@ public class User {
     public void plusPoint() {
         this.point += 1;
     }
+
+    public void updateprofileImage(String image){this.profileImage = image;}
 }
