@@ -24,7 +24,7 @@ public class FindPwService {
 
 
 
-    public String findPw(String email) {
+    public void findPw(String email) {
 
         //user 의 accountId 가 dms eamil임으로 만약 찾지 못하면, 회원가입한 이메일이 아닌것임.
         User user = userRepository.findByAccountId(email).orElseThrow(() -> new RuntimeException("User not found"));
@@ -47,16 +47,9 @@ public class FindPwService {
 
         FindPwResponse findPwResponse = FindPwResponse.builder()
                 .title("요청하신 임시비밀번호입니다!")
-                .content("")
+                .content("보")
                 .receivedAddress(email)
                 .build();
-
-
-
-
-
-
-
 
     }
 
