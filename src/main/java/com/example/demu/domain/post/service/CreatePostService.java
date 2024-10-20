@@ -5,7 +5,6 @@ import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.post.domain.repository.PostRepository;
 import com.example.demu.domain.post.dto.request.CreatePostRequest;
 import com.example.demu.domain.user.domain.User;
-import com.example.demu.infra.service.S3ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,16 +21,16 @@ public class CreatePostService {
 
     private final PostRepository postRepository;
     private final UserFacade userFacade;
-    private final S3ImageService s3ImageService;
+ //   private final S3ImageService s3ImageService;
 
     public void createPost(CreatePostRequest request, List<MultipartFile> images) {
 
         User user = userFacade.CurrentUser();
-        List<String> imageLinks = new ArrayList<>();
+       /* List<String> imageLinks = new ArrayList<>();
         for(MultipartFile image: images){
             imageLinks.add(s3ImageService.upload(image));
         }
-
+*/
 
         postRepository.save(Post.builder()
                 .user(user)
@@ -40,7 +39,7 @@ public class CreatePostService {
                 .major(request.getMajor())
                 .date(LocalDateTime.now())
                 .recommend(0L)
-                .imageLinks(imageLinks)
+  //              .imageLinks(imageLinks)
                 .build());
     }
 

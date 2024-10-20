@@ -28,7 +28,7 @@ public class AuthController {
     private final UpdateMajorService updateMajorService;
     private final UpdateNicknameService updateNicknameService;
     private final UpdateIntroService updateIntroService;
-    private final UpdateProfileImageService updateProfileImageService;
+ 
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
@@ -65,8 +65,5 @@ public class AuthController {
         updateNicknameService.updateNickname(request);
     }
 
-    @PatchMapping("/profile-image")
-    public void updateProfileImage(@RequestParam("images") MultipartFile image){
-        updateProfileImageService.upDateProfile(image);
-    }
+
 }
