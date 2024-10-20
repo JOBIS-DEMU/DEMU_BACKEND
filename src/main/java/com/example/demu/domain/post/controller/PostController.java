@@ -43,7 +43,7 @@ public class PostController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/{post-id}/recommend")
+    @PostMapping("/recommend/{post-id}")
     public void addRecommend(@PathVariable("post-id") Long id) {
         recommendService.addRecommend(id);
     }

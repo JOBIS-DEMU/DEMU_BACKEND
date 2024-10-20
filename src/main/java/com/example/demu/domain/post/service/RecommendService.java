@@ -2,6 +2,7 @@ package com.example.demu.domain.post.service;
 
 import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.post.domain.repository.PostRepository;
+import com.example.demu.domain.post.exception.PostNotfoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,7 @@ public class RecommendService {
     public void addRecommend(Long id) {
 
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("게시물을 찾을 수 없습니다."));
+                .orElseThrow(() -> PostNotfoundException.EXCEPTION);
 
         post.addRecommend();
         post.getUser().plusPoint();
