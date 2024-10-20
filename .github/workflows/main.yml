@@ -72,7 +72,6 @@ jobs:
     # 환경 변수 설정 및 export
     - name: Set environment variables
       run: |
-        export S3_BUCKET_NAME=${{ env.S3_BUCKET_NAME }}
         export DB_URL=${{ secrets.DB_URL }}
         export DB_USERNAME=${{ secrets.DB_USERNAME }}
         export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
@@ -83,8 +82,7 @@ jobs:
         export REFRESH_EXP=${{ secrets.REFRESH_EXP }}
         export HEADER=${{ secrets.HEADER }}
         export PREFIX=${{ secrets.PREFIX }}
-        export AWS_CODE_DEPLOY_APPLICATION=${{ env.AWS_CODE_DEPLOY_APPLICATION }}
-        export AWS_S3_BUCKET=${{ env.AWS_S3_BUCKET }}
+  
 
     # S3에 업로드
     - name: S3에 업로드
