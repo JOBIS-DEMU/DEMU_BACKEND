@@ -8,6 +8,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import javax.persistence.*;
 
 @Getter
@@ -61,4 +66,8 @@ public class User {
     }
 
     public void updateprofileImage(String image){this.profileImage = image;}
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
 }

@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DB_URL:jdbc:mysql://localhost:3306/demu}
     username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:12345}
+    password: ${DB_PASSWORD:1234}
 
   jpa:
     database: mysql
@@ -26,6 +26,7 @@ jwt:
   header: ${HEADER:Authorization}
   prefix: ${PREFIX:Bearer}
 
+
 #Authorize
 
 logging:
@@ -41,7 +42,7 @@ logging:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${EMAIL:cmd081119@gmail.com}
+    username: ${EMAIL:jeaminruy@gmail.com}
     password: ${PASSWORD:cuth uyaz tggw qkhf}
     properties:
       mail:
