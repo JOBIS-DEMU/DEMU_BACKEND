@@ -20,6 +20,10 @@ public class AuthController {
     private final SignInService signInService;
     private final ReissueSerivce reissueSerivce;
     private final FindPwService findPwService;
+    private final UpdateMajorService updateMajorService;
+    private final UpdateNicknameService updateNicknameService;
+    private final UpdateIntroService updateIntroService;
+ 
     private final UpdateProfileImageService updateProfileImageService;
 
     @PostMapping("/signup")
@@ -43,6 +47,25 @@ public class AuthController {
     public void vaildateEmail(@PathVariable String email) {
         findPwService.findPw(email);
     }
+
+    @PatchMapping("/intro")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateIntro(@RequestBody @Valid IntroReqeust reqeust) {
+        updateIntroService.updateIntro(reqeust);
+    }
+
+    @PatchMapping("/major")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateMajor(@RequestBody UpdateMajorRequest request) {
+        updateMajorService.updateMajor(request);
+    }
+
+    @PatchMapping("/nickname")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateNickname(@RequestBody @Valid UpdateNicknameRequest request) {
+        updateNicknameService.updateNickname(request);
+    }
+
 
     @PatchMapping("/profile-image")
     public void updateProfileImage(@RequestParam("images") MultipartFile image){
