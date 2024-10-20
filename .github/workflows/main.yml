@@ -86,15 +86,15 @@ jobs:
 
     # S3에 업로드
     - name: S3에 업로드
-      run: aws deploy push --application-name $AWS_CODE_DEPLOY_APPLICATION \
+      run: aws deploy push --application-name demu \
             --ignore-hidden-files \
-            --s3-location s3://$S3_BUCKET_NAME/cicdtest/${{ github.sha }}.zip \
+            --s3-location s3://$demu-deploy/cicd/${{ github.sha }}.zip \
             --source .
 
     # EC2에 배포
     - name: EC2에 배포
       run: aws deploy create-deployment \
-            --application-name $AWS_CODE_DEPLOY_APPLICATION \
+            --application-name $demu \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --deployment-group-name demu-group \
-            --s3-location bucket=$AWS_S3_BUCKET,key=cicdtest/${{ github.sha }}.zip,bundleType=zip
+            --s3-location bucket=$AWS_S3_BUCKET,key=cicd/${{ github.sha }}.zip,bundleType=zip
