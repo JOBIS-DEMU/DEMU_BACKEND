@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${{ secrets.DB_URL }}
+    username:  ${{ secrets.DB_USERNAME }}
+    password: ${{ secrets.DB_PASSWORD }}
 
   jpa:
     database: mysql
@@ -13,21 +13,21 @@ spring:
     show-sql: true
 
 redis:
-  port: ${REDIS_PORT}
-  host: ${REDIS_HOST}
+  port: ${{ secrets.REDIS_PORT }}
+  host: ${{ secrets.REDIS_HOST }}
 
 jwt:
-  secret_key: ${SECRET_KEY}
-  access_exp: ${ACCESS_EXP}
-  refresh_exp: ${REFRESH_EXP}
-  header: ${HEADER}
-  prefix: ${PREFIX}
+  secret_key: ${{ secrets.SECRET_KEY }}
+  access_exp: ${{ secrets.ACCESS_EXP }}
+  refresh_exp: ${{ secrets.REFRESH_EXP }}
+  header: ${{ secrets.HEADER }}
+  prefix: ${{ secrets.PREFIX }}
 
 cloud:
   aws:
     credentials:
-      accessKey: ${AWS_ACCESS_KEY}
-      secretKey: ${AWS_SECRET_KEY}
+      accessKey: ${{ secrets.AWS_ACCESS_KEY }}
+      secretKey: ${{ secrets.AWS_SECRET_KEY }}
     s3:
       bucket: demu-s3-bucket
     region:
