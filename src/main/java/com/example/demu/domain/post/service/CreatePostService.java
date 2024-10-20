@@ -23,7 +23,7 @@ public class CreatePostService {
     private final UserFacade userFacade;
  //   private final S3ImageService s3ImageService;
 
-    public void createPost(CreatePostRequest request, List<MultipartFile> images) {
+    public void createPost(CreatePostRequest request) {
 
         User user = userFacade.CurrentUser();
        /* List<String> imageLinks = new ArrayList<>();

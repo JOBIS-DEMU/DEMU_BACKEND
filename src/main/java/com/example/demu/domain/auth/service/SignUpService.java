@@ -36,6 +36,7 @@ public class SignUpService {
                     .password(passwordEncoder.encode(signUpRequest.getPassword()))
                     .grade(Grade.BRONZE)
                     .major(Major.NONE)
+                    .point(0L)
                     .build()
     );
 
