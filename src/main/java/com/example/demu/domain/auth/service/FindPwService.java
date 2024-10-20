@@ -48,7 +48,7 @@ public class FindPwService {
 
         FindPwResponse findPwResponse = FindPwResponse.builder()
                 .title("요청하신 임시비밀번호입니다!")
-                .content("보안에 유의하여 확인하세요\n"+tempPw)
+                .content("\n[보안에 유의하여 확인하세요]\n"+tempPw)
                 .receivedAddress(email)
                 .build();
 
