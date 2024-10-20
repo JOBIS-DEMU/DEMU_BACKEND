@@ -6,9 +6,13 @@ import com.example.demu.domain.post.domain.repository.PostRepository;
 import com.example.demu.domain.post.exception.CannotModifyPostException;
 import com.example.demu.domain.post.facade.PostFacade;
 import com.example.demu.domain.user.domain.User;
+import com.example.demu.infra.service.S3ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collections;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -18,10 +22,16 @@ public class DeletePostService {
     private final PostRepository postRepository;
     private final UserFacade userFacade;
     private final PostFacade postFacade;
+    private final S3ImageService s3ImageService;
 
     public void deletePost(Long id){
         User user = userFacade.CurrentUser();
         Post post = postFacade.getPost(id);
+
+        List<String> images = post.getImageLinks();
+
+
+        images.forEach(s3ImageService::deleteImageFromS3);
 
         if(!user.equals(post.getUser())) {
             throw CannotModifyPostException.EXCEPTION;

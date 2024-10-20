@@ -9,7 +9,9 @@ import com.example.demu.domain.post.service.UpdatePostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
@@ -24,8 +26,8 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
-    public void createPost(@RequestBody @Valid CreatePostRequest request){
-        createPostService.createPost(request);
+    public void createPost(@RequestBody @Valid CreatePostRequest request, @RequestParam("images") List<MultipartFile> images){
+        createPostService.createPost(request, images);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
