@@ -18,8 +18,8 @@ env:
   REFRESH_EXP: ${{ secrets.REFRESH_EXP }}
   HEADER: ${{ secrets.HEADER }}
   PREFIX: ${{ secrets.PREFIX }}
-  AWS_CODE_DEPLOY_APPLICATION: demu  # CodeDeploy application name
-  AWS_S3_BUCKET: demu-deploy          # S3 bucket name
+  AWS_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+  AWS_SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
 jobs:
   build:
@@ -27,74 +27,81 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3  # 최신 버전으로 업데이트
+      - uses: actions/checkout@v3
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3  # 최신 버전으로 업데이트
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-    - name: Build with Gradle
-      run: ./gradlew clean build -x test  # 테스트 제외 가능
+      - name: Build with Gradle
+        run: ./gradlew clean build
 
-    # 디렉토리 생성
-    - name: Make Directory
-      run: mkdir -p deploy
+      # 디렉토리 생성
+      - name: Make Directory
+        run: mkdir -p deploy
 
-    # Jar 파일 복사
-    - name: Copy Jar
-      run: cp ./build/libs/*.jar ./deploy
+      # Jar 파일 복사
+      - name: Copy Jar
+        run: cp ./build/libs/*.jar ./deploy
 
-    # appspec.yml 파일 복사
-    - name: Copy appspec.yml
-      run: cp appspec.yml ./deploy
+      # appspec.yml 파일 복사
+      - name: Copy appspec.yml
+        run: cp appspec.yml ./deploy
 
-    # script files 복사
-    - name: Copy script
-      run: cp ./scripts/*.sh ./deploy
 
-    - name: Make zip file
-      run: zip -r ./coinTalk.zip ./deploy
-      shell: bash
+      # script files 복사
+      - name: Copy script
+        run: cp ./scripts/*.sh ./deploy
 
-    # AWS Credential 설정
-    - name: AWS credential 설정
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-region: ap-northeast-2
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+      # 환경변수 설정
+      - name: Set environment variables
+        run: |
+          echo "DB_URL=$DB_URL" >> .env
+          echo "DB_USERNAME=$DB_USERNAME" >> .env
+          echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+          echo "REDIS_PORT=$REDIS_PORT" >> .env
+          echo "REDIS_HOST=$REDIS_HOST" >> .env
+          echo "SECRET_KEY=$SECRET_KEY" >> .env
+          echo "ACCESS_EXP=$ACCESS_EXP" >> .env
+          echo "REFRESH_EXP=$REFRESH_EXP" >> .env
+          echo "HEADER=$HEADER" >> .env
+          echo "PREFIX=$PREFIX" >> .env
+          echo "AWS_ACCESS_KEY=$AWS_ACCESS_KEY" >> .env
+          echo "AWS_SECRET_KEY=$AWS_SECRET_KEY" >> .env
+      # 환경변수 복사
+      - name: Copy .env to deploy directory
+        run: cp .env ./deploy/.env
 
-    # 환경 변수 설정 및 export
-    - name: Set environment variables
-      run: |
-        export DB_URL=${{ secrets.DB_URL }}
-        export DB_USERNAME=${{ secrets.DB_USERNAME }}
-        export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-        export REDIS_PORT=${{ secrets.REDIS_PORT }}
-        export REDIS_HOST=${{ secrets.REDIS_HOST }}
-        export SECRET_KEY=${{ secrets.SECRET_KEY }}
-        export ACCESS_EXP=${{ secrets.ACCESS_EXP }}
-        export REFRESH_EXP=${{ secrets.REFRESH_EXP }}
-        export HEADER=${{ secrets.HEADER }}
-        export PREFIX=${{ secrets.PREFIX }}
-  
+      - name: Make zip file
+        run: zip -r ./demu.zip ./deploy
+        shell: bash
 
-    # S3에 업로드
-    - name: S3에 업로드
-      run: aws deploy push --application-name demu \
-            --ignore-hidden-files \
-            --s3-location s3://$demu-deploy/cicd/${{ github.sha }}.zip \
-            --source .
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ap-northeast-2
 
-    # EC2에 배포
-    - name: EC2에 배포
-      run: aws deploy create-deployment \
-            --application-name $demu \
-            --deployment-config-name CodeDeployDefault.AllAtOnce \
-            --deployment-group-name demu-group \
-            --s3-location bucket=$AWS_S3_BUCKET,key=cicd/${{ github.sha }}.zip,bundleType=zip
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./demu.zip s3://$S3_BUCKET_NAME/
+
+
+
+      # Deploy
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        run: |
+          aws deploy create-deployment \
+          --application-name demu \
+          --deployment-group-name demu-group \
+          --file-exists-behavior OVERWRITE \
+          --s3-location bucket=demu-deploy,bundleType=zip,key=demu.zip \
+          --region ap-northeast-2
