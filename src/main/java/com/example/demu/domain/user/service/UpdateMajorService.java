@@ -1,6 +1,6 @@
-package com.example.demu.domain.auth.service;
+package com.example.demu.domain.user.service;
 
-import com.example.demu.domain.auth.controller.dto.UpdateNicknameRequest;
+import com.example.demu.domain.user.controller.dto.UpdateMajorRequest;
 import com.example.demu.domain.auth.facade.UserFacade;
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.repository.UserRepository;
@@ -11,15 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class UpdateNicknameService {
+public class UpdateMajorService {
 
     private final UserRepository userRepository;
     private final UserFacade userFacade;
 
-    public void updateNickname(UpdateNicknameRequest request) {
+    public void updateMajor(UpdateMajorRequest request) {
         User user = userFacade.CurrentUser();
 
-        user.updateNickname(request.getNickname());
+        user.updateMajor(request.getMajor());
         userRepository.save(user);
     }
+
 }

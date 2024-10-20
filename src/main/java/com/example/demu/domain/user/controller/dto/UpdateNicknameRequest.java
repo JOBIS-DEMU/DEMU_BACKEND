@@ -1,11 +1,9 @@
-package com.example.demu.domain.auth.controller.dto;
+package com.example.demu.domain.user.controller.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Getter
 @NoArgsConstructor

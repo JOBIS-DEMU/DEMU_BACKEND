@@ -1,4 +1,4 @@
-package com.example.demu.domain.auth.controller.dto;
+package com.example.demu.domain.user.controller.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
