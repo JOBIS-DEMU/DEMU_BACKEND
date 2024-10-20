@@ -13,7 +13,6 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/public")
 public class AuthController {
 
     private final SignUpService signUpService;
@@ -26,13 +25,13 @@ public class AuthController {
  
     private final UpdateProfileImageService updateProfileImageService;
 
-    @PostMapping("/signup")
+    @PostMapping("public/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public TokenResponse SignUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         return signUpService.execute(signUpRequest);
     }
 
-    @PostMapping("/signin")
+    @PostMapping("public/signin")
     @ResponseStatus(HttpStatus.OK)
     public TokenResponse signin(@RequestBody @Valid SignInRequest signInRequest) {
         return signInService.signIn(signInRequest);
@@ -43,7 +42,7 @@ public class AuthController {
         return reissueSerivce.reissue(refreshToken);
     }
 
-    @GetMapping("password/find/{email}")
+    @GetMapping("public/password/find/{email}")
     public void vaildateEmail(@PathVariable String email) {
         findPwService.findPw(email);
     }

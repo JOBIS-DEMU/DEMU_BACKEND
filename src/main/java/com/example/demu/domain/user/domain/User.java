@@ -47,7 +47,6 @@ public class User {
     @ColumnDefault("0") // DB 에 들어갈 컬럼의 초기값 설정.
     private Long point;
 
-
     public void updateNickname(String nickname) {
         this.nickname = nickname;
     }

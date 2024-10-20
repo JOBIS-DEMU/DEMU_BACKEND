@@ -26,8 +26,8 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
-    public void createPost(@RequestBody @Valid CreatePostRequest request, @RequestParam("images") List<MultipartFile> images){
-        createPostService.createPost(request, images);
+    public void createPost(@RequestBody @Valid CreatePostRequest request){
+        createPostService.createPost(request);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
