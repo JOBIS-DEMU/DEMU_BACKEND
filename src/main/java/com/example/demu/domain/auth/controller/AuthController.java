@@ -2,18 +2,17 @@ package com.example.demu.domain.auth.controller;
 
 import com.example.demu.domain.auth.controller.dto.SignInRequest;
 import com.example.demu.domain.auth.controller.dto.SignUpRequest;
+import com.example.demu.domain.auth.facade.UserFacade;
 import com.example.demu.domain.auth.service.SignInService;
 import com.example.demu.domain.auth.service.SignUpService;
-import com.example.demu.domain.auth.service.VaildateEmailService;
 import com.example.demu.domain.auth.controller.dto.*;
 import com.example.demu.domain.auth.service.*;
+import com.example.demu.domain.user.domain.User;
 import com.example.demu.global.security.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.Valid;
 
 import javax.validation.Valid;
 
@@ -27,7 +26,10 @@ public class AuthController {
     private final UpdateMajorService updateMajorService;
     private final UpdateNicknameService updateNicknameService;
     private final UpdateIntroService updateIntroService;
- 
+    private final ResetPasswordService resetPassword;
+    private final ResetPasswordService resetPasswordService;
+    private final UserFacade userFacade;
+
 
     @PostMapping("public/signup")
     @ResponseStatus(HttpStatus.CREATED)
@@ -41,10 +43,18 @@ public class AuthController {
         return signInService.signIn(signInRequest);
     }
 
-    @GetMapping("public/password/find/{email}")
-    public void vaildateEmail(@PathVariable String email) {
-       findPwService.findPw(email);
+
+    @GetMapping("/password/vaildate")
+    public void validatePassowd(@AuthenticationPrincipal User user, PasswordRequest passwordRequest){
+        userFacade.validatePassword(user, passwordRequest.getPassword());
     }
+
+
+    @PatchMapping("/password/reset")
+    public void resetPassword(@AuthenticationPrincipal User user, @RequestBody @Valid PasswordRequest resetPasswordRequest) {
+        resetPasswordService.resetPassword(user,resetPasswordRequest);
+    }
+
 
     @PatchMapping("/intro")
     @ResponseStatus(HttpStatus.OK)
