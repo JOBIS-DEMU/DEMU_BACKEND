@@ -46,9 +46,9 @@ public class AuthController {
     }
 
 
-    @GetMapping("/password/vaildate")
-    public void validatePassword(@AuthenticationPrincipal User user, PasswordRequest passwordRequest){
-        userFacade.validatePassword(user,passwordRequest.getPassword());
+    @GetMapping("/password/validate")
+    public void validatePassword(@RequestBody PasswordRequest passwordRequest){
+        userFacade.validatePassword(passwordRequest.getPassword());
     }
 
 
