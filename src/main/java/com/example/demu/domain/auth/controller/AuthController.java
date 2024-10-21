@@ -9,9 +9,11 @@ import com.example.demu.domain.auth.controller.dto.*;
 import com.example.demu.domain.auth.service.*;
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.global.security.TokenResponse;
+import com.example.demu.global.security.auth.AuthDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -45,14 +47,14 @@ public class AuthController {
 
 
     @GetMapping("/password/vaildate")
-    public void validatePassowd(@AuthenticationPrincipal User user, PasswordRequest passwordRequest){
-        userFacade.validatePassword(user, passwordRequest.getPassword());
+    public void validatePassword(@AuthenticationPrincipal User user, PasswordRequest passwordRequest){
+        userFacade.validatePassword(user,passwordRequest.getPassword());
     }
 
 
     @PatchMapping("/password/reset")
-    public void resetPassword(@AuthenticationPrincipal User user, @RequestBody @Valid PasswordRequest resetPasswordRequest) {
-        resetPasswordService.resetPassword(user,resetPasswordRequest);
+    public void resetPassword(@RequestBody @Valid PasswordRequest resetPasswordRequest) {
+        resetPasswordService.resetPassword(resetPasswordRequest);
     }
 
 

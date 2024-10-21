@@ -1,5 +1,6 @@
 package com.example.demu.global.security.auth;
 
+import com.example.demu.domain.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +11,7 @@ import java.util.Collection;
 @Getter
 @AllArgsConstructor
 public class AuthDetail implements UserDetails {
-    private final String accountId;
+    private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -19,12 +20,12 @@ public class AuthDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return accountId;
+        return user.getAccountId();
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.repository.UserRepository;
 import com.example.demu.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -30,7 +31,12 @@ public class UserFacade {
     }
 
     public void validatePassword(User user,String currentPassword){
-        if(!(passwordEncoder.matches(user.getPassword(), currentPassword))){
+        System.out.println("현재비번 :"+user.getPassword());
+        System.out.println("입력값 비번 : "+currentPassword);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+
+        if(!(passwordEncoder.matches(SecurityContextHolder.getContext().getAuthentication().getCredentials().toString(), currentPassword))){
             throw new RuntimeException("Invalid password");
         }
     }
