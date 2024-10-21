@@ -59,5 +59,5 @@ public class User {
         this.major = major;
     }
 
-    public void updateProfile(String string){this.profile = profile;}
+    public void updateProfile(String profile){this.profile = profile;}
 }

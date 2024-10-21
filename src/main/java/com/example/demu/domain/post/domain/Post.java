@@ -30,7 +30,6 @@ public class Post {
     @Lob
     private String content;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime date;
 
     private Long recommend;
