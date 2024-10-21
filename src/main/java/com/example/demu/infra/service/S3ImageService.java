@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @Component
 @Service
-public class S3ImageFacade {
+public class S3ImageService {
 
     private final AmazonS3 amazonS3;
 
