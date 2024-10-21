@@ -30,13 +30,15 @@ public class UserFacade {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
-    public void validatePassword(User user,String currentPassword){
+    public void validatePassword(String currentPassword){
+        User user = CurrentUser();
+
         System.out.println("현재비번 :"+user.getPassword());
         System.out.println("입력값 비번 : "+currentPassword);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 
-        if(!(passwordEncoder.matches(SecurityContextHolder.getContext().getAuthentication().getCredentials().toString(), currentPassword))){
+
+        if(!(passwordEncoder.matches(currentPassword,user.getPassword()))){
             throw new RuntimeException("Invalid password");
         }
     }
