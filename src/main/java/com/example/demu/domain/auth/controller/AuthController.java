@@ -2,12 +2,15 @@ package com.example.demu.domain.auth.controller;
 
 import com.example.demu.domain.auth.controller.dto.SignInRequest;
 import com.example.demu.domain.auth.controller.dto.SignUpRequest;
+import com.example.demu.domain.auth.service.SignInService;
+import com.example.demu.domain.auth.service.SignUpService;
+import com.example.demu.domain.auth.controller.dto.*;
 import com.example.demu.domain.auth.service.*;
+import com.example.demu.domain.post.service.GetUserAllPostsService;
 import com.example.demu.global.security.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -22,27 +25,24 @@ public class AuthController {
     private final UpdateMajorService updateMajorService;
     private final UpdateNicknameService updateNicknameService;
     private final UpdateIntroService updateIntroService;
- 
     private final UpdateProfileImageService updateProfileImageService;
+    private final GetUserAllPostsService getUserAllPostsService;
+    private final GetMyPageService getMyPageService;
 
-    @PostMapping("public/signup")
+
+    @PostMapping("/public/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public TokenResponse SignUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         return signUpService.execute(signUpRequest);
     }
 
-    @PostMapping("public/signin")
+    @PostMapping("/public/signin")
     @ResponseStatus(HttpStatus.OK)
     public TokenResponse signin(@RequestBody @Valid SignInRequest signInRequest) {
         return signInService.signIn(signInRequest);
     }
 
-    @PostMapping("/token")
-    public TokenResponse reissue(String refreshToken) {
-        return reissueSerivce.reissue(refreshToken);
-    }
-
-    @GetMapping("public/password/find/{email}")
+    @GetMapping("/public/password/find/{email}")
     public void vaildateEmail(@PathVariable String email) {
         findPwService.findPw(email);
     }
@@ -65,6 +65,11 @@ public class AuthController {
         updateNicknameService.updateNickname(request);
     }
 
+    @GetMapping("/my-page")
+    @ResponseStatus(HttpStatus.OK)
+    public GetMyPageResponse getMyPage() {
+        return getMyPageService.getMyPage();
+    }
 
     @PatchMapping("/profile-image")
     public void updateProfileImage(@RequestParam("images") MultipartFile image){

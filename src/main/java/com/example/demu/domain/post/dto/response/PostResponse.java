@@ -1,17 +1,26 @@
 package com.example.demu.domain.post.dto.response;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import com.example.demu.domain.post.domain.Post;
+import com.example.demu.domain.user.domain.type.Grade;
+import lombok.*;
 
 @Getter
-@NoArgsConstructor
+@AllArgsConstructor
 public class PostResponse {
 
     private Long id;
-    private String accountId;
+    private String nickname;
     private String title;
     private String content;
-    private String date;
-    private String recommend;
-    private String major;
+    private Long recommend;
+    private Grade grade;
+
+    public PostResponse (Post post) {
+        this.id = post.getId();
+        this.nickname = post.getUser().getNickname();
+        this.title = post.getTitle();
+        this.content = post.getContent();
+        this.recommend = post.getRecommend();
+        this.grade = post.getUser().getGrade();
+    }
 }
