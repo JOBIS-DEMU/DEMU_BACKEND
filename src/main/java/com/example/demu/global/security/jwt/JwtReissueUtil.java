@@ -63,6 +63,8 @@ public class JwtReissueUtil {
     public Authentication getAuthentication(String token) {
         Claims claims = getPayload(token);
         UserDetails userDetails = authDetailSerivce.loadUserByUsername(claims.getSubject());
+        System.out.println("accountId : "+claims.getSubject());
+
         return new UsernamePasswordAuthenticationToken(userDetails,"",userDetails.getAuthorities());
     }
 

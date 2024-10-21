@@ -1,5 +1,6 @@
 package com.example.demu.domain.user.domain;
 
+
 import com.example.demu.domain.user.domain.type.Grade;
 import com.example.demu.domain.user.domain.type.Major;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -21,8 +24,9 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 public class User {
+
     @Id
-    @Column(nullable = false,columnDefinition = "VARCHAR(60)")
+    @Column(name = "account_id", nullable = false, columnDefinition = "VARCHAR(60)")
     private String accountId;
 
     //게시물 번호(post_id) 추가해야함.
@@ -46,6 +50,7 @@ public class User {
     @Column(nullable = false)
     @ColumnDefault("0") // DB 에 들어갈 컬럼의 초기값 설정.
     private Long point;
+
 
     public void updateNickname(String nickname) {
         this.nickname = nickname;
