@@ -36,5 +36,6 @@ chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 
-# nohup java -jar -Duser.timezone=Asia/Seoul $JAR_NAME >> $REPOSITORY/nohup.out 2>&1 &
-nohup export $(cat .env | xargs) && java -jar app/DEMU-0.0.1-SNAPSHOT.jar &
+#export $(cat $REPOSITORY/.env | xargs)
+#nohup java -jar -Duser.timezone=Asia/Seoul $JAR_NAME >> $REPOSITORY/nohup.out 2>&1 &
+export $(cat $REPOSITORY/.env | xargs) && java -jar $REPOSITORY/DEMU-0.0.1-SNAPSHOT.jar
