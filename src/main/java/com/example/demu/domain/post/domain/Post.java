@@ -43,6 +43,15 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private Major major;
 
+    @Getter
+    @NoArgsConstructor
+    public class CreatePostRequest {
+
+        private String title;
+        private String content;
+        private Major major;
+    }
+
     @ElementCollection
     private List<String> imageLinks;
     public void updatePost(String title, String content, Major major) {

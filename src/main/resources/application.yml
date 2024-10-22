@@ -1,16 +1,21 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL:jdbc:mysql://localhost:3306/demu}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/one}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:1234}
 
   jpa:
     database: mysql
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update #update
     show-sql: true
+
+    logging:
+      level:
+        org.hibernate.SQL: DEBUG
+        org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
   jackson:
     property-naming-strategy: SNAKE_CASE
