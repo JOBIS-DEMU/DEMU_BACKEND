@@ -31,7 +31,6 @@ public class CreatePostService {
             imageLinks.add(s3ImageService.upload(image));
         }
 */
-
         postRepository.save(Post.builder()
                 .user(user)
                 .title(request.getTitle())
