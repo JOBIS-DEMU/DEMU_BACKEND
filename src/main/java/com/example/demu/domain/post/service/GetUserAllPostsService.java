@@ -7,6 +7,7 @@ import com.example.demu.domain.post.dto.response.PostResponse;
 import com.example.demu.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class GetUserAllPostsService {
     private final PostRepository postRepository;
     private final GetAllCommentService getAllCommentService;
 
+    @Transactional(readOnly = true)
     public List<PostResponse> getUserAllPosts() {
         User user = userFacade.CurrentUser();
         return postRepository.findAll()

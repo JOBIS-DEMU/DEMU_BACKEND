@@ -7,6 +7,7 @@ import com.example.demu.domain.post.facade.PostFacade;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class GetAllCommentService {
     private final CommentRepository commentRepository;
     private final PostFacade postFacade;
 
+    @Transactional(readOnly = true)
     public List<CommentResponse> getAllComment(Long id) {
         Post post = postFacade.getPost(id);
         return commentRepository.findAll()
