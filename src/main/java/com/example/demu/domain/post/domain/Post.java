@@ -57,4 +57,5 @@ public class Post {
     public void addRecommend() {
         this.recommend += 1;
     }
+
 }

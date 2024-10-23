@@ -4,16 +4,19 @@ import com.example.demu.domain.post.dto.request.CreatePostRequest;
 import com.example.demu.domain.post.dto.request.UpdatePostRequest;
 import com.example.demu.domain.post.dto.response.PostResponse;
 import com.example.demu.domain.post.service.*;
+import com.example.demu.domain.post.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @RequestMapping("/post")
 @RestController
+@RequiredArgsConstructor
 public class PostController {
 
     private final CreatePostService createPostService;
@@ -22,6 +25,7 @@ public class PostController {
     private final RecommendService recommendService;
     private final GetPostService getPostService;
     private final GetUserAllPostsService getUserAllPostsService;
+    private final GradePercentService gradePercentService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
@@ -57,6 +61,12 @@ public class PostController {
     @GetMapping("/get/my-posts")
     public List<PostResponse> getAllUserPost(){
         return getUserAllPostsService.getUserAllPosts();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping("/grade")
+    public double getPercent() {
+        return gradePercentService.getPercent();
     }
 
 }
