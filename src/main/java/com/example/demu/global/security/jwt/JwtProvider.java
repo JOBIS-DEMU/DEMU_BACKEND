@@ -60,14 +60,14 @@ public class JwtProvider {
     public String resolveToken(HttpServletRequest request){
 
         String bearerToken = request.getHeader(jwtProperties.getHeader());
-        System.out.println("bearerToken: " + bearerToken);
+
 
         if(bearerToken != null && bearerToken.startsWith(jwtProperties.getPrefix())
         && bearerToken.length() > jwtProperties.getPrefix().length()){
-            System.out.println("aaaa");
+
             return bearerToken.substring(jwtProperties.getPrefix().length()).trim();
         }
-        System.out.println("bbbb");
+
         return null;
     }
 

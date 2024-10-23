@@ -12,18 +12,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JoinColumn(name = "post_id")
     @ManyToOne
-    private Post postId;
+    private Post post;
 
     @JoinColumn(name = "user_id")
     @ManyToOne
-    private User userId;
+    private User user;
 
     @Column(columnDefinition = "VARCHAR(300)")
     private String content;
+
 }

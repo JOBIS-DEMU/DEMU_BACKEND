@@ -1,6 +1,6 @@
 package com.example.demu.domain.post.domain;
 
-import java.util.*;
+import com.example.demu.domain.comment.domain.Comment;
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.type.Major;
 import lombok.*;
@@ -8,10 +8,12 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -43,8 +45,9 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private Major major;
 
-    @ElementCollection
-    private List<String> imageLinks;
+    //@ElementCollection
+    //private List<String> imageLinks;
+
     public void updatePost(String title, String content, Major major) {
         this.title = title;
         this.content = content;

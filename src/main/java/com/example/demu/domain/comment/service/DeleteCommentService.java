@@ -24,7 +24,7 @@ public class DeleteCommentService {
         User user = userFacade.CurrentUser();
         Comment comment = commentFacade.getComment(id);
 
-        if(!user.equals(comment.getUserId())) {
+        if(!user.equals(comment.getUser())) {
             throw NotDeleteCommentException.EXCEPTION;
         }
 

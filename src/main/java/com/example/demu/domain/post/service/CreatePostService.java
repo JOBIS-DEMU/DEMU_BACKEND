@@ -8,10 +8,7 @@ import com.example.demu.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDateTime;
 
 @Service
@@ -36,7 +33,6 @@ public class CreatePostService {
                 .user(user)
                 .title(request.getTitle())
                 .content(request.getContent())
-                .major(request.getMajor())
                 .date(LocalDateTime.now())
                 .recommend(0L)
   //              .imageLinks(imageLinks)
