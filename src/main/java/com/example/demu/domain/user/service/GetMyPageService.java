@@ -1,4 +1,4 @@
-package com.example.demu.domain.auth.service;
+package com.example.demu.domain.user.service;
 
 import com.example.demu.domain.auth.controller.dto.GetMyPageResponse;
 import com.example.demu.domain.auth.facade.UserFacade;

@@ -4,9 +4,7 @@ import com.example.demu.domain.auth.controller.dto.SignInRequest;
 import com.example.demu.domain.auth.controller.dto.SignUpRequest;
 import com.example.demu.domain.auth.service.SignInService;
 import com.example.demu.domain.auth.service.SignUpService;
-import com.example.demu.domain.auth.controller.dto.*;
 import com.example.demu.domain.auth.service.*;
-import com.example.demu.domain.post.service.GetUserAllPostsService;
 import com.example.demu.global.security.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,14 +18,8 @@ public class AuthController {
 
     private final SignUpService signUpService;
     private final SignInService signInService;
-    private final ReissueSerivce reissueSerivce;
     private final FindPwService findPwService;
-    private final UpdateMajorService updateMajorService;
-    private final UpdateNicknameService updateNicknameService;
-    private final UpdateIntroService updateIntroService;
-    private final UpdateProfileImageService updateProfileImageService;
-    private final GetUserAllPostsService getUserAllPostsService;
-    private final GetMyPageService getMyPageService;
+    private final ReissueService reissueService;
 
 
     @PostMapping("/public/signup")
@@ -47,32 +39,13 @@ public class AuthController {
         findPwService.findPw(email);
     }
 
-    @PatchMapping("/intro")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateIntro(@RequestBody @Valid IntroReqeust reqeust) {
-        updateIntroService.updateIntro(reqeust);
-    }
+//    @PatchMapping("/profile-image")
+//    public void updateProfileImage(@RequestParam("images") MultipartFile image){
+//        updateProfileImageService.upDateProfile(image);
+//    }
 
-    @PatchMapping("/major")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateMajor(@RequestBody UpdateMajorRequest request) {
-        updateMajorService.updateMajor(request);
-    }
-
-    @PatchMapping("/nickname")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateNickname(@RequestBody @Valid UpdateNicknameRequest request) {
-        updateNicknameService.updateNickname(request);
-    }
-
-    @GetMapping("/my-page")
-    @ResponseStatus(HttpStatus.OK)
-    public GetMyPageResponse getMyPage() {
-        return getMyPageService.getMyPage();
-    }
-
-    @PatchMapping("/profile-image")
-    public void updateProfileImage(@RequestParam("images") MultipartFile image){
-        updateProfileImageService.upDateProfile(image);
+    @PatchMapping("/token")
+    public TokenResponse reissue(String refreshToken) {
+        return reissueService.reissue(refreshToken);
     }
 }

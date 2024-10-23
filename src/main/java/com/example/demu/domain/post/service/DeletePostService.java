@@ -26,7 +26,7 @@ public class DeletePostService {
         User user = userFacade.CurrentUser();
         Post post = postFacade.getPost(id);
 
-        List<String> images = post.getImageLinks();
+        //List<String> images = post.getImageLinks();
 
 
      //   images.forEach(s3ImageService::deleteImageFromS3);
