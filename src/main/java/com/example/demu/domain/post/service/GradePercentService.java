@@ -16,7 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
     public double getPercent() {
 
         User user = userFacade.CurrentUser();
-
-        return ((double) (user.getPoint()-user.getGrade().getPoint()) / user.getGrade().getNextPointLength()) * 100;
+        if(user.getPoint() < 70){
+            return ((double) (user.getPoint()-user.getGrade().getPoint()) / user.getGrade().getNextPointLength()) * 100;
+        } else{
+            return 100.0;
+        }
     }
 }
