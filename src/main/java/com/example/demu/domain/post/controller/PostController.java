@@ -2,11 +2,9 @@ package com.example.demu.domain.post.controller;
 
 import com.example.demu.domain.post.dto.request.CreatePostRequest;
 import com.example.demu.domain.post.dto.request.UpdatePostRequest;
-import com.example.demu.domain.post.service.CreatePostService;
-import com.example.demu.domain.post.service.DeletePostService;
-import com.example.demu.domain.post.service.RecommendService;
-import com.example.demu.domain.post.service.UpdatePostService;
+import com.example.demu.domain.post.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,20 +12,24 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import javax.validation.Valid;
 
-@RequiredArgsConstructor
+
 @RequestMapping("/post")
 @RestController
+@RequiredArgsConstructor
 public class PostController {
 
     private final CreatePostService createPostService;
     private final DeletePostService deletePostService;
     private final UpdatePostService updatePostService;
     private final RecommendService recommendService;
+    private final GradePercentService gradePercentService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
-    public void createPost(@RequestBody @Valid CreatePostRequest request, @RequestParam("images") List<MultipartFile> images){
-        createPostService.createPost(request, images);
+    //public void createPost(@RequestBody @Valid CreatePostRequest request, @RequestParam(value = "images") List<MultipartFile> images){
+    public void createPost(@RequestBody @Valid CreatePostRequest request){
+        //createPostService.createPost(request, images);
+        createPostService.createPost(request);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -46,6 +48,12 @@ public class PostController {
     @PostMapping("/recommend/{post-id}")
     public void addRecommend(@PathVariable("post-id") Long id) {
         recommendService.addRecommend(id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping("/grade")
+    public double getPercent() {
+        return gradePercentService.getPercent();
     }
 
 }

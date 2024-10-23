@@ -21,6 +21,5 @@ public class RecommendService {
 
         post.addRecommend();
         post.getUser().plusPoint();
+        }
     }
-
-}

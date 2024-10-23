@@ -19,8 +19,8 @@ public class AuthController {
     private final SignUpService signUpService;
     private final SignInService signInService;
     private final ReissueSerivce reissueSerivce;
-    private final FindPwService findPwService;
-    private final UpdateProfileImageService updateProfileImageService;
+//    private final FindPwService findPwService;
+//    private final UpdateProfileImageService updateProfileImageService;
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,13 +39,13 @@ public class AuthController {
         return reissueSerivce.reissue(refreshToken);
     }
 
-    @GetMapping("password/find/{email}")
-    public void vaildateEmail(@PathVariable String email) {
-        findPwService.findPw(email);
-    }
-
-    @PatchMapping("/profile-image")
-    public void updateProfileImage(@RequestParam("images") MultipartFile image){
-        updateProfileImageService.upDateProfile(image);
-    }
+//    @GetMapping("password/find/{email}")
+//    public void vaildateEmail(@PathVariable String email) {
+//        findPwService.findPw(email);
+//    }
+//
+//    @PatchMapping("/profile-image")
+//    public void updateProfileImage(@RequestParam("images") MultipartFile image){
+//        updateProfileImageService.upDateProfile(image);
+//    }
 }

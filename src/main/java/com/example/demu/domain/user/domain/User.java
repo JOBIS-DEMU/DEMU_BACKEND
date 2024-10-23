@@ -15,6 +15,7 @@ import javax.persistence.Enumerated;
 
 import javax.persistence.*;
 
+
 @Getter
 @Entity
 @AllArgsConstructor
@@ -22,14 +23,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class User {
     @Id
-    @Column(nullable = false,columnDefinition = "VARCHAR(60)")
+    @Column(nullable = false, columnDefinition = "VARCHAR(60)")
     private String accountId;
 
     //게시물 번호(post_id) 추가해야함.
-    @Column(nullable = false,columnDefinition = "VARCHAR(50)")
+    @Column(nullable = false, columnDefinition = "VARCHAR(50)")
     private String nickname;
 
-    @Column(nullable = false,columnDefinition = "VARCHAR(60)")
+    @Column(nullable = false, columnDefinition = "VARCHAR(60)")
     private String password;
 
     @Enumerated(EnumType.STRING) //enum 인덱스 대신 bronze,silver 등의 string 값으로 저장
@@ -45,7 +46,7 @@ public class User {
 
     @Column(nullable = false)
     @ColumnDefault("0") // DB 에 들어갈 컬럼의 초기값 설정.
-    private Long point;
+    private int point;
 
     private String profileImage;
 
@@ -63,6 +64,7 @@ public class User {
 
     public void plusPoint() {
         this.point += 1;
+        this.grade = getGradeByPoints(this.point);
     }
 
     public void updateprofileImage(String image){this.profileImage = image;}
@@ -70,4 +72,40 @@ public class User {
     public void updatePassword(String password) {
         this.password = password;
     }
+
+    public Grade getGradeByPoints(int point) {
+//        return switch (point) {
+//            case 0 -> Grade.BRONZE;
+//            case 10 -> Grade.SILVER;
+//            case 25 -> Grade.GOLD;
+//            case 45 -> Grade.PLATINUM;
+//            case 70 -> Grade.DIAMOND;
+//            default -> throw new RuntimeException("point error");
+       // };
+//    return switch (point) {
+//            case 10 -> Grade.SILVER;
+//            case 25 -> Grade.GOLD;
+//            case 45 -> Grade.PLATINUM;
+//            case 70 -> Grade.DIAMOND;
+//            default -> Grade.BRONZE;
+//        };
+
+    if(point<10){
+        return Grade.BRONZE;
+        }
+    else if(point<25){
+        return Grade.SILVER;
+    }
+    else if(point<45){
+        return Grade.GOLD;
+    }
+    else if(point<70){
+        return Grade.PLATINUM;
+    }
+    else{
+        return Grade.DIAMOND;
+    }
+
+    }
+
 }
