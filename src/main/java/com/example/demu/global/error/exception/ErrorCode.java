@@ -17,6 +17,7 @@ public enum ErrorCode {
     EMPTY_FILE_EXCEPTION(400, "Empty File"),
     NO_FILE_EXTENTION(400, "No File Extension"),
     INVALID_FILE_EXTENTION(400, "Invalid File Extension"),
+    CANNOT_MODIFY_POST(403, "Cannot Modify Post"),
 
     // S3 업로드 관련 예외
     IO_EXCEPTION_ON_IMAGE_UPLOAD(500, "IO Exception on Image Upload"),
@@ -28,6 +29,9 @@ public enum ErrorCode {
     // 이미지 목록 조회 예외
     EXCEPTION_ON_LIST_IMAGES(500, "Failed to Retrieve Image List");
 
+
+    COMMENT_NOT_FOUND(404, "Comment Not Found"),
+    CANNOT_DELETE_COMMENT(403, "Not Delete Comment");
 
     private final int status;
     private final String message;

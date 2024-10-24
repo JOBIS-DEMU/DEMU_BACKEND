@@ -12,9 +12,11 @@ import com.example.demu.global.security.jwt.JwtReissueUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class SignUpService {
 
     private final JwtReissueUtil jwtReissueUtil;
@@ -34,6 +36,7 @@ public class SignUpService {
                     .password(passwordEncoder.encode(signUpRequest.getPassword()))
                     .grade(Grade.BRONZE)
                     .major(Major.NONE)
+                    .point(0)
                     .build()
     );
 

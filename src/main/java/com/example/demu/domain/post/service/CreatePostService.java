@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class CreatePostService {
 
     private final PostRepository postRepository;
@@ -32,11 +31,9 @@ public class CreatePostService {
                 .user(user)
                 .title(request.getTitle())
                 .content(request.getContent())
-                .major(request.getMajor())
                 .date(LocalDateTime.now())
                 .recommend(0L)
                 .images(imagesToString)
                 .build());
     }
-
 }
