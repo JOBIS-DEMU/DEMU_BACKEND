@@ -30,9 +30,6 @@ public class AuthController {
     private final ResetPasswordService resetPasswordService;
     private final JwtProperties jwtProperties;
     private final ProfileImageUploadService profileImageUploadService;
-    private final UpdateIntroService updateIntroService;
-    private final UpdateNicknameService updateNicknameService;
-    private final UpdateMajorService updateMajorService;
 
     @PostMapping("/public/signup")
     @ResponseStatus(HttpStatus.CREATED)
