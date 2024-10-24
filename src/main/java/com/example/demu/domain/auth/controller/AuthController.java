@@ -8,10 +8,13 @@ import com.example.demu.domain.auth.service.SignInService;
 import com.example.demu.domain.auth.service.SignUpService;
 import com.example.demu.domain.auth.service.*;
 import com.example.demu.global.security.TokenResponse;
+import com.example.demu.global.security.jwt.JwtProperties;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -24,6 +27,7 @@ public class AuthController {
     private final UserFacade userFacade;
     private final ReissueService reissueService;
     private final ResetPasswordService resetPasswordService;
+    private final JwtProperties jwtProperties;
 
     @PostMapping("/public/signup")
     @ResponseStatus(HttpStatus.CREATED)
@@ -53,9 +57,9 @@ public class AuthController {
         resetPasswordService.resetPassword(resetPasswordRequest);
     }
 
-    @PatchMapping("public/token")
-    public TokenResponse reissue(String refreshToken) {
-        return reissueService.reissue(refreshToken);
+    @PatchMapping("public/token/reissue")
+    public TokenResponse reissue(HttpServletRequest request) {
+        return reissueService.reissue(request);
     }
 
 //    @PatchMapping("/profile-image")
