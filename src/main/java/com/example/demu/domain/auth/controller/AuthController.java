@@ -29,7 +29,6 @@ public class AuthController {
     private final ReissueService reissueService;
     private final ResetPasswordService resetPasswordService;
     private final JwtProperties jwtProperties;
-    private final ProfileImageUploadService profileImageUploadService;
 
     @PostMapping("/public/signup")
     @ResponseStatus(HttpStatus.CREATED)
@@ -64,9 +63,5 @@ public class AuthController {
         return reissueService.reissue(request);
     }
 
-    @PatchMapping("/profile")
-    public void updateProfile(@RequestParam("image")MultipartFile image){
-        profileImageUploadService.execute(image);
-    }
 
 }

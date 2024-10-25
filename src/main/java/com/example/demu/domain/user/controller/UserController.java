@@ -1,6 +1,7 @@
 package com.example.demu.domain.user.controller;
 
 import com.example.demu.domain.auth.controller.dto.GetMyPageResponse;
+import com.example.demu.domain.auth.service.ProfileImageUploadService;
 import com.example.demu.domain.post.service.GetUserAllPostsService;
 import com.example.demu.domain.user.controller.dto.IntroReqeust;
 import com.example.demu.domain.user.controller.dto.UpdateMajorRequest;
@@ -9,9 +10,11 @@ import com.example.demu.domain.user.service.GetMyPageService;
 import com.example.demu.domain.user.service.UpdateIntroService;
 import com.example.demu.domain.user.service.UpdateMajorService;
 import com.example.demu.domain.user.service.UpdateNicknameService;
+import com.example.demu.infra.service.S3ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -25,6 +28,7 @@ public class UserController {
     private final UpdateNicknameService updateNicknameService;
     private final GetMyPageService getMyPageService;
     private final GetUserAllPostsService getUserAllPostsService;
+    private final ProfileImageUploadService profileImageUploadService;
 
     @PatchMapping("/intro")
     @ResponseStatus(HttpStatus.OK)
@@ -48,6 +52,10 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public GetMyPageResponse getMyPage() {
         return getMyPageService.getMyPage();
+    }
+    @PatchMapping("/profile")
+    public void updateProfile(@RequestParam("image") MultipartFile image){
+        profileImageUploadService.execute(image);
     }
 
 
