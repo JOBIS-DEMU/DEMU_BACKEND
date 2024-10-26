@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()//csrf 보호 비활성화
-                .cors().configurationSource(corsConfigurationSource())
+                .cors()
                 .and()
                 .exceptionHandling()
                 .and()
