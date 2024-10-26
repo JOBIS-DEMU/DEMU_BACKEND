@@ -5,6 +5,7 @@ import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.user.domain.type.Grade;
 import com.example.demu.domain.user.domain.type.Major;
 import lombok.*;
+import java.util.*;
 
 @Getter
 @AllArgsConstructor
@@ -18,6 +19,7 @@ public class PostResponse {
     private Grade grade;
     private Major major;
     private int commentCount;
+    private List<String> images;
 
     public PostResponse (Post post, int count) {
         this.id = post.getId();
@@ -28,6 +30,7 @@ public class PostResponse {
         this.grade = post.getUser().getGrade();
         this.major = post.getMajor();
         this.commentCount = count;
+        this.images = post.getImages();
     }
 
 }

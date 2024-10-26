@@ -14,12 +14,14 @@ public class GetMyPageResponse {
     private Major major;
     private String intro;
     private Grade grade;
+    private String profile;
 
     public GetMyPageResponse(User user) {
         this.nickname = user.getNickname();
         this.major = user.getMajor();
         this.intro = user.getIntro();
         this.grade = user.getGrade();
+        this.profile = user.getProfile();
     }
 
 }
