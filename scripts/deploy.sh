@@ -39,3 +39,4 @@ echo "> $JAR_NAME 실행"
 #export $(cat $REPOSITORY/.env | xargs)
 #nohup java -jar -Duser.timezone=Asia/Seoul $JAR_NAME >> $REPOSITORY/nohup.out 2>&1 &
 export $(cat $REPOSITORY/.env | xargs) && java -jar $REPOSITORY/DEMU-0.0.1-SNAPSHOT.jar
+#export $(cat /home/ubuntu/app/.env | xargs) && java -jar /home/ubuntu/app/DEMU-0.0.1-SNAPSHOT.jar

@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//jwt 방식이니 세션 저장안하기
                 .and()
                 .authorizeRequests()
-                    .antMatchers("/public/**").permitAll() // (/pulic/ 으로 시작하는 url 은 로그인 없이도 사용 가능)
+                .antMatchers("/public/**").permitAll() // (/pulic/ 으로 시작하는 url 은 로그인 없이도 사용 가능)
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
