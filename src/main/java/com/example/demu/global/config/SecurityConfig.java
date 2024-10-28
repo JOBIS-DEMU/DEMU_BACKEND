@@ -26,7 +26,6 @@ import java.util.List;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtFilter jwtFilter;
 
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()//csrf 보호 비활성화
