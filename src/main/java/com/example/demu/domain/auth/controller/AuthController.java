@@ -20,6 +20,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class AuthController {
 
     private final SignUpService signUpService;

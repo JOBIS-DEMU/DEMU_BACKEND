@@ -13,6 +13,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("public/search")
+@CrossOrigin
 public class SearchController {
     private final SearchService searchService;
 
