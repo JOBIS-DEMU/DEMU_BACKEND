@@ -30,12 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()//csrf 보호 비활성화
-                .cors().configurationSource(corsConfigurationSource())
-                .and()
+                .cors().and()
                 .exceptionHandling()
                 .and()
-                .headers().frameOptions().disable()
-                .and()
+                .headers().frameOptions().sameOrigin().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//jwt 방식이니 세션 저장안하기
                 .and()
                 .authorizeRequests()
