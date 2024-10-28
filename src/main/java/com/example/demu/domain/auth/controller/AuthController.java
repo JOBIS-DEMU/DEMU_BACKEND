@@ -33,12 +33,14 @@ public class AuthController {
 
     @PostMapping("/public/signup")
     @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin
     public TokenResponse SignUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         return signUpService.execute(signUpRequest);
     }
 
     @PostMapping("/public/signin")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin
     public TokenResponse signin(@RequestBody @Valid SignInRequest signInRequest) {
         return signInService.signIn(signInRequest);
     }
