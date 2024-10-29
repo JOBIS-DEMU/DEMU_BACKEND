@@ -54,7 +54,7 @@ public class S3ImageService {
 
     private String uploadImageToS3(MultipartFile image) throws IOException {
         String originalFilename = image.getOriginalFilename(); // 원본 파일명 가져오기
-        if (originalFilename == null || originalFilename.isEmpty()) {
+        if (originalFilename == null || originalFilename.isEmpty() || image == null) {
             throw EmptyFileException.EXCEPTION; // 파일명이 없을 경우 예외 처리
         }
 
