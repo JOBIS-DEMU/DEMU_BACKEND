@@ -21,7 +21,6 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-@CrossOrigin
 public class UserController {
 
     private final UpdateIntroService updateIntroService;

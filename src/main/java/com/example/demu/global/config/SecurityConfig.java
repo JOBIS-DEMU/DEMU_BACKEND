@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers()
                 .frameOptions()
-                .sameOrigin()
+                .disable()
 
                 .and()
                 .sessionManagement()
@@ -53,7 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowedMethods(Arrays.asList( "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")); // HTTP 메서드 허용
         configuration.setAllowCredentials(false);
         configuration.addAllowedHeader("*"); // 모든 헤더 허용
-        configuration.addAllowedOrigin("http://localhost:5173");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration); // 모든 경로에 대해 위에서 설정한 CORS 설정 적용
