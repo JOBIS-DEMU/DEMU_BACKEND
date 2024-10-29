@@ -37,7 +37,7 @@ public class S3ImageService {
     private String bucketName;
 
     public String upload(MultipartFile image) {
-        if(image.isEmpty() || Objects.isNull(image.getOriginalFilename())){ // 이미지 비어있으면 예외처리
+        if(image.isEmpty() || Objects.isNull(image.getOriginalFilename()) || image == null){ // 이미지 비어있으면 예외처리
             throw EmptyFileException.EXCEPTION;
         }
         return this.uploadImage(image);
