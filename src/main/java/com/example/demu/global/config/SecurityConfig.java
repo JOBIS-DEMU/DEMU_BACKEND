@@ -2,6 +2,7 @@ package com.example.demu.global.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -36,10 +37,12 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()  // OPTIONS 요청 허용
                 .anyRequest().permitAll()
                 .and()
                 .build();
     }
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
