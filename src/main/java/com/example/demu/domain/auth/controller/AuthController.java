@@ -44,7 +44,7 @@ public class AuthController {
     }
 
 
-    @GetMapping("/password/validate")
+    @PostMapping("/password/validate")
     public void validatePassword(@RequestBody PasswordRequest passwordRequest) {
         userFacade.validatePassword(passwordRequest.getPassword());
     }
