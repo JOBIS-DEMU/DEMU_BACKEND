@@ -20,7 +20,6 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class AuthController {
 
     private final SignUpService signUpService;
@@ -29,7 +28,6 @@ public class AuthController {
     private final UserFacade userFacade;
     private final ReissueService reissueService;
     private final ResetPasswordService resetPasswordService;
-    private final JwtProperties jwtProperties;
 
     @PostMapping("/public/signup")
     @ResponseStatus(HttpStatus.CREATED)
