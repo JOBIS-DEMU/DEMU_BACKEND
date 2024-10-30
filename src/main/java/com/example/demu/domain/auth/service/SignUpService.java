@@ -1,6 +1,8 @@
 package com.example.demu.domain.auth.service;
 
 import com.example.demu.domain.auth.controller.dto.SignUpRequest;
+import com.example.demu.domain.auth.exception.AccountIdAlreadyExistsException;
+import com.example.demu.domain.auth.exception.NicknameAlreadyExistsException;
 import com.example.demu.domain.auth.facade.UserFacade;
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.repository.UserRepository;
@@ -26,10 +28,13 @@ public class SignUpService {
     private final PasswordEncoder passwordEncoder;
 
     public TokenResponse execute(SignUpRequest signUpRequest) {
-    //최초 유저 생성시 비활성화 해야함 (nullPointerException 뜸)
+        if(signUpRequest.getNickname()== "aaaa"){
+            throw NicknameAlreadyExistsException.EXCEPTION;
+        }
+
     userFacade.CheckByaccountId(signUpRequest.getAccountId());
     userFacade.CheckBynickname(signUpRequest.getNickname());
-    
+
 
     userRepository.save(
             User.builder()
