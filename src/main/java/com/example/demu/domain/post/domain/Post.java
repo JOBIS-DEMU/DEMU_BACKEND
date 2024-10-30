@@ -11,6 +11,8 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,7 +36,7 @@ public class Post {
     @Column(columnDefinition = "VARCHAR(50)")
     private String title;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private LocalDateTime date;
