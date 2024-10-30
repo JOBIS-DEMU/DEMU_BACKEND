@@ -6,6 +6,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
+    //회원가입시 이미 존재함
+    ACCOUNT_ID_ALREADY_EXISTS(409,"accountId already exists"),
+    NICKNAME_ALREADY_EXISTS(409,"nickname already exists"),
+
 
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 

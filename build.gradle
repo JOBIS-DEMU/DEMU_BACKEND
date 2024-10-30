@@ -32,8 +32,6 @@ dependencies {
 	//jwt
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 
-	//비밀번호 암호화
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	//기본
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -57,7 +55,7 @@ dependencies {
 jar {
 	manifest {
 		attributes(
-				'Main-Class': 'main.java.com.exapmple.demu.DemuApplication'
+				'Main-Class': 'main.java.com.example.demu.DemuApplication'
 		)
 	}
 }
