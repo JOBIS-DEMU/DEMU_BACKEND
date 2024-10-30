@@ -28,7 +28,7 @@ public class SignUpService {
     private final PasswordEncoder passwordEncoder;
 
     public TokenResponse execute(SignUpRequest signUpRequest) {
-        if(signUpRequest.getNickname()== "aaaa"){
+        if(signUpRequest.getNickname().equals("aaaa")){
             throw NicknameAlreadyExistsException.EXCEPTION;
         }
 
