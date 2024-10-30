@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL}
-    username:  ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/one}
+    username:  ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:1234}
 
   jpa:
     database: mysql
@@ -21,25 +21,25 @@ spring:
     property-naming-strategy: SNAKE_CASE
 
 redis:
-  port: ${REDIS_PORT}
-  host: ${REDIS_HOST}
+  port: ${REDIS_PORT:6379}
+  host: ${REDIS_HOST:localhost}
 
 jwt:
-  secret_key: ${SECRET_KEY}
-  access_exp: ${ACCESS_EXP}
-  refresh_exp: ${REFRESH_EXP}
-  header: ${HEADER}
-  prefix: ${PREFIX}
-
-cloud:
-  aws:
-    credentials:
-      accessKey: ${AWS_ACCESS_KEY}
-      secretKey: ${AWS_SECRET_KEY}
-    s3:
-      bucket: demu-s3-bucket
-    region:
-      static: ap-northeast-2
+  secret_key: ${SECRET_KEY:asdfadfasfasfdweweadgrh}
+  access_exp: ${ACCESS_EXP:12000}
+  refresh_exp: ${REFRESH_EXP:24000}
+  header: ${HEADER:Authorization}
+  prefix: ${PREFIX:Bearer}
+#
+#cloud:
+#  aws:
+#    credentials:
+#      accessKey: ${AWS_ACCESS_KEY}
+#      secretKey: ${AWS_SECRET_KEY}
+#    s3:
+#      bucket: demu-s3-bucket
+#    region:
+#      static: ap-northeast-2
 
   mail:
     host: smtp.gmail.com

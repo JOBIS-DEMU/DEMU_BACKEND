@@ -1,7 +1,7 @@
 package com.example.demu.domain.search.controller;
 
 
-import com.example.demu.domain.post.domain.Post;
+//import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.search.service.SearchService;
 import com.example.demu.domain.user.domain.type.Major;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("public/search")
 public class SearchController {
     private final SearchService searchService;
-
+/*
 
     @GetMapping("/title/{keyword}")
     public Optional<List<Post>> searchByTitle(@PathVariable String keyword){
@@ -26,5 +26,5 @@ public class SearchController {
     public Optional<List<Post>> searchByMajor(@PathVariable(name = "major") String strMajor){
         return searchService.findAllByMajor(strMajor);
     }
-
+*/
 }

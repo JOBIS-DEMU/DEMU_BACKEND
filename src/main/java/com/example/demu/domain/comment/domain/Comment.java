@@ -1,6 +1,6 @@
 package com.example.demu.domain.comment.domain;
 
-import com.example.demu.domain.post.domain.Post;
+//import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.user.domain.User;
 import lombok.*;
 
@@ -17,9 +17,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "post_id")
-    @ManyToOne
-    private Post post;
+   // @JoinColumn(name = "post_id")
+   // @ManyToOne
+   // private Post post;
 
     @JoinColumn(name = "user_id")
     @ManyToOne
