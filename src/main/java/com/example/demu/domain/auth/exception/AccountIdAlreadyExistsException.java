@@ -7,7 +7,7 @@ public class AccountIdAlreadyExistsException extends DemuException {
 
     public static final DemuException EXCEPTION = new AccountIdAlreadyExistsException();
 
-    private AccountIdAlreadyExistsException() {
+    public AccountIdAlreadyExistsException() {
         super(ErrorCode.ACCOUNT_ID_ALREADY_EXISTS);
     }
 }
