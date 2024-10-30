@@ -15,8 +15,11 @@ import java.util.*;
 
 import com.example.demu.global.error.exception.ErrorCode;
 import com.example.demu.global.error.exception.S3Exception;
+import com.example.demu.infra.exception.EmptyFileException;
+import com.example.demu.infra.exception.IoException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -34,8 +37,8 @@ public class S3ImageService {
     private String bucketName;
 
     public String upload(MultipartFile image) {
-        if(image.isEmpty() || Objects.isNull(image.getOriginalFilename())){ // 이미지 비어있으면 예외처리
-            throw new S3Exception(ErrorCode.EMPTY_FILE_EXCEPTION);
+        if(image.isEmpty() || Objects.isNull(image.getOriginalFilename()) || image == null){ // 이미지 비어있으면 예외처리
+            throw EmptyFileException.EXCEPTION;
         }
         return this.uploadImage(image);
     }
@@ -45,14 +48,14 @@ public class S3ImageService {
         try {
             return this.uploadImageToS3(image);
         } catch (IOException e) {
-            throw new S3Exception(ErrorCode.IO_EXCEPTION_ON_IMAGE_UPLOAD);
+            throw IoException.EXCEPTION;
         }
     }
 
     private String uploadImageToS3(MultipartFile image) throws IOException {
         String originalFilename = image.getOriginalFilename(); // 원본 파일명 가져오기
-        if (originalFilename == null || originalFilename.isEmpty()) {
-            throw new S3Exception(ErrorCode.EMPTY_FILE_EXCEPTION); // 파일명이 없을 경우 예외 처리
+        if (originalFilename == null || originalFilename.isEmpty() || image == null) {
+            throw EmptyFileException.EXCEPTION; // 파일명이 없을 경우 예외 처리
         }
 
         // 확장자 추출
@@ -104,7 +107,7 @@ public class S3ImageService {
     private void validateImageFileExtention(String filename) {
         int lastDotIndex = filename.lastIndexOf(".");
         if (lastDotIndex == -1) {
-            throw new S3Exception(ErrorCode.NO_FILE_EXTENTION);
+            throw new S3Exception(ErrorCode.NOT_FILE_EXTENTION);
         }
 
         String extention = filename.substring(lastDotIndex + 1).toLowerCase();
@@ -127,30 +130,30 @@ public class S3ImageService {
         }
     }
 
-    public List<String> getAllImagesFromS3() {
-        List<String> imageUrls = new ArrayList<>();
-
-        try {
-            // S3 버킷에서 객체 목록 가져오기
-            ObjectListing objectListing = amazonS3.listObjects(bucketName);
-
-            // 각 객체에 대해 URL을 생성하고 목록에 추가
-            for (S3ObjectSummary os : objectListing.getObjectSummaries()) {
-                // 파일 이름을 가져옴
-                String fileName = os.getKey();
-
-                // 이미지인지 확인 (jpg, png, gif 확장자만 허용)
-                this.validateImageFileExtention(fileName);
-                String fileUrl = amazonS3.getUrl(bucketName, fileName).toString();
-                imageUrls.add(fileUrl); // 이미지 URL을 리스트에 추가
-
-            }
-
-        } catch (Exception e) {
-            // 예외 처리
-            throw new S3Exception(ErrorCode.EXCEPTION_ON_LIST_IMAGES);
-        }
-
-        return imageUrls;
-    }
+//    public List<String> getAllImagesFromS3() {
+//        List<String> imageUrls = new ArrayList<>();
+//
+//        try {
+//            // S3 버킷에서 객체 목록 가져오기
+//            ObjectListing objectListing = amazonS3.listObjects(bucketName);
+//
+//            // 각 객체에 대해 URL을 생성하고 목록에 추가
+//            for (S3ObjectSummary os : objectListing.getObjectSummaries()) {
+//                // 파일 이름을 가져옴
+//                String fileName = os.getKey();
+//
+//                // 이미지인지 확인 (jpg, png, gif 확장자만 허용)
+//                this.validateImageFileExtention(fileName);
+//                String fileUrl = amazonS3.getUrl(bucketName, fileName).toString();
+//                imageUrls.add(fileUrl); // 이미지 URL을 리스트에 추가
+//
+//            }
+//
+//        } catch (Exception e) {
+//            // 예외 처리
+//            throw new S3Exception(ErrorCode.EXCEPTION_ON_LIST_IMAGES);
+//        }
+//
+//        return imageUrls;
+//    }
 }

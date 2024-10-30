@@ -19,7 +19,7 @@ public enum ErrorCode {
     POST_NOT_FOUND(404, "Post Not Found"),
     CANNOT_MODIFY_POST(403, "Cannot Modify Post"),
     EMPTY_FILE_EXCEPTION(400, "Empty File"),
-    NO_FILE_EXTENTION(400, "No File Extension"),
+    NOT_FILE_EXTENTION(400, "Not File "),
     INVALID_FILE_EXTENTION(400, "Invalid File Extension"),
 
     // S3 업로드 관련 예외

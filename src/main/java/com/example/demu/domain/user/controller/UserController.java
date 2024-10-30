@@ -54,7 +54,7 @@ public class UserController {
         return getMyPageService.getMyPage();
     }
     @PatchMapping("/profile")
-    public void updateProfile(@RequestParam("image") MultipartFile image){
+    public void updateProfile(@Valid @RequestParam("image") MultipartFile image){
         profileImageUploadService.execute(image);
     }
 
