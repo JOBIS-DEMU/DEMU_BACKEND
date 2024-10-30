@@ -28,10 +28,6 @@ public class SignUpService {
     private final PasswordEncoder passwordEncoder;
 
     public TokenResponse execute(SignUpRequest signUpRequest) {
-        if(signUpRequest.getNickname().equals("aaaa")){
-            throw NicknameAlreadyExistsException.EXCEPTION;
-        }
-
     userFacade.CheckByaccountId(signUpRequest.getAccountId());
     userFacade.CheckBynickname(signUpRequest.getNickname());
 
