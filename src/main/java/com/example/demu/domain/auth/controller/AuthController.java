@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+@CrossOrigin("*")
 @RestController
 @RequiredArgsConstructor
 public class AuthController {
@@ -61,6 +62,4 @@ public class AuthController {
     public TokenResponse reissue(HttpServletRequest request) {
         return reissueService.reissue(request);
     }
-
-
 }
