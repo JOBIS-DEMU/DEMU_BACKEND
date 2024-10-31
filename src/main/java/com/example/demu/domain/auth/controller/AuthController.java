@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-@CrossOrigin("*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/public")

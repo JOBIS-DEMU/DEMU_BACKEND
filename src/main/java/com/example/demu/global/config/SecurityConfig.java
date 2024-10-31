@@ -26,25 +26,40 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf()
-                .disable()
-                .cors(withDefaults())
-                .exceptionHandling()
-                .and()
-                .headers()
-                .frameOptions()
-                .disable()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeHttpRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()  // OPTIONS 요청 허용
-                .anyRequest().permitAll()
-                .and()
-                .build();
+            .csrf()
+            .disable()
+            .cors().and()
+            .exceptionHandling()
+
+            .and()
+            .headers()
+            .frameOptions()
+            .sameOrigin()
+
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+            .and()
+            .authorizeRequests()
+            .anyRequest().permitAll()
+            .and()
+            .build();
     }
 
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedOrigins(List.of("*")); // 모든 도메인 허용
+        configuration.setAllowedMethods(Arrays.asList("OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")); // HTTP 메서드 허용
+        configuration.setAllowCredentials(false);
+        configuration.addAllowedHeader("*"); // 모든 헤더 허용
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration); // 모든 경로에 대해 위에서 설정한 CORS 설정 적용
+        return source;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
