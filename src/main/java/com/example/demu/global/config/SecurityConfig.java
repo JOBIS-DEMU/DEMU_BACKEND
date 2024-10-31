@@ -3,6 +3,7 @@ package com.example.demu.global.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -16,6 +17,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig {
@@ -25,8 +28,7 @@ public class SecurityConfig {
         return http
                 .csrf()
                 .disable()
-                .cors()
-                .and()
+                .cors(withDefaults())
                 .exceptionHandling()
                 .and()
                 .headers()
@@ -43,19 +45,6 @@ public class SecurityConfig {
                 .build();
     }
 
-
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(List.of("http://3.37.219.136:8080", "http://127.0.0.1:5500")); // 개발 환경에서만
-//        configuration.setAllowedMethods(Arrays.asList("OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE"));
-//        configuration.setAllowCredentials(true);
-//        configuration.addAllowedHeader("*");
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
