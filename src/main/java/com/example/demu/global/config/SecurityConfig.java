@@ -1,15 +1,19 @@
 package com.example.demu.global.config;
 
+import com.example.demu.global.error.GlobalExceptionFilter;
+import com.example.demu.global.security.jwt.JwtReissueUtil;
+import com.example.demu.global.security.jwt.JwtTokenFilter;
+import com.example.demu.global.security.jwt.JwtTokenProvider;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -17,34 +21,39 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @RequiredArgsConstructor
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-            .csrf()
-            .disable()
-            .cors().and()
-            .exceptionHandling()
+    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtReissueUtil jwtReissueUtil;
+    private final ObjectMapper objectMapper;
 
-            .and()
-            .headers()
-            .frameOptions()
-            .sameOrigin()
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-            .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        httpSecurity
+                .csrf()
+                .disable()
+                .cors().and()
+                .exceptionHandling()
 
-            .and()
-            .authorizeRequests()
-            .anyRequest().permitAll()
-            .and()
-            .build();
+                .and()
+                .headers()
+                .frameOptions()
+                .sameOrigin()
+
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                .and()
+                .authorizeRequests()
+                .anyRequest().permitAll()
+
+                .and()
+                .addFilterBefore(new JwtTokenFilter(jwtTokenProvider, jwtReissueUtil), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new GlobalExceptionFilter(objectMapper), JwtTokenFilter.class);
     }
 
     @Bean

@@ -8,7 +8,6 @@ import com.example.demu.domain.user.domain.User;
 import com.example.demu.infra.service.S3ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.time.LocalDateTime;

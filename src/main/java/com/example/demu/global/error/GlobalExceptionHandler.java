@@ -2,24 +2,44 @@ package com.example.demu.global.error;
 
 import com.example.demu.global.error.exception.DemuException;
 import com.example.demu.global.error.exception.ErrorCode;
-import org.apache.coyote.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolationException;
+
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(DemuException.class)
-    public ResponseEntity<ErrorResponse> customExceptionHandling(DemuException e) {
-        final ErrorCode errorCode = e.getErrorCode();
 
-        return new ResponseEntity<>(
-                ErrorResponse.builder()
-                        .status(errorCode.getStatus())
-                        .message(errorCode.getMessage())
-                        .build(),
-                HttpStatus.valueOf(errorCode.getStatus())
-        );
+    @ExceptionHandler(DemuException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessException(DemuException e) {
+
+        ErrorCode errorCode = e.getErrorCode();
+        ErrorResponse response = ErrorResponse.of(errorCode, errorCode.getMessage());
+        e.printStackTrace();
+
+        return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException e) {
+
+        ErrorCode errorCode = ErrorCode.BAD_REQUEST;
+        ErrorResponse response = ErrorResponse.of(errorCode, errorCode.getMessage());
+        e.printStackTrace();
+
+        return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+
+        ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
+        ErrorResponse response = ErrorResponse.of(errorCode, e.getMessage());
+
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

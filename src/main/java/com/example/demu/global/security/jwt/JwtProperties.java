@@ -1,32 +1,34 @@
 package com.example.demu.global.security.jwt;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.PostConstruct;
-import java.util.Base64;
+import org.springframework.stereotype.Component;
 
 @Getter
-@Configuration
+@Component
 public class JwtProperties {
-    @Value("${jwt.header}")
-    private String header;
+    public static final String header = "Authorization";
+    public static final String prefix = "Bearer";
+    public static final String secretKey = "dfhasjkdfhayffhdtyhdfkjfvfddkvnvssdvnknkknlnkdkmnlvknllnkknlvfdhydshghjkdfaskverafter";
+    public static final long accessExp = 10000L;
+    public static final long refreshExp = 604800;
 
-    @Value("${jwt.prefix}")
-    private String prefix;
+    public String getHeader() {
+        return header;
+    }
 
-    @Value("${jwt.access_exp}")
-    private long accessExp;
+    public String getPrefix() {
+        return prefix;
+    }
 
-    @Value("${jwt.refresh_exp}")
-    private long refreshExp;
+    public String getSecretKey() {
+        return secretKey;
+    }
 
-    @Value("${jwt.secret_key}")
-    private String secretKey;
+    public Long getAccessExp() {
+        return accessExp;
+    }
 
-    @PostConstruct
-    private void encodingSecretKey(){
-        Base64.getEncoder().encodeToString(this.secretKey.getBytes());
+    public Long getRefreshExp() {
+        return refreshExp;
     }
 }

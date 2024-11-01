@@ -10,10 +10,8 @@ import com.example.demu.domain.auth.service.*;
 import com.example.demu.global.security.TokenResponse;
 import com.example.demu.global.security.jwt.JwtProperties;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

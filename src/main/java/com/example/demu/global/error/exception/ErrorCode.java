@@ -9,7 +9,7 @@ public enum ErrorCode {
     //회원가입시 이미 존재함
     ACCOUNT_ID_ALREADY_EXISTS(409,"accountId already exists"),
     NICKNAME_ALREADY_EXISTS(409,"nickname already exists"),
-
+    BAD_REQUEST(400, "Bad request"),
 
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 
@@ -32,6 +32,8 @@ public enum ErrorCode {
     // 이미지 목록 조회 예외
     EXCEPTION_ON_LIST_IMAGES(500, "Failed to Retrieve Image List"),
 
+    EXPIRED_TOKEN(403, "Expired token"),
+    INVALID_TOKEN(403, "Invalid token"),
 
     COMMENT_NOT_FOUND(404, "Comment Not Found"),
     CANNOT_DELETE_COMMENT(403, "Not Delete Comment");

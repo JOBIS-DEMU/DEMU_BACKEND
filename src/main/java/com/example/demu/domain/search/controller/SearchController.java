@@ -3,7 +3,6 @@ package com.example.demu.domain.search.controller;
 
 import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.search.service.SearchService;
-import com.example.demu.domain.user.domain.type.Major;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
