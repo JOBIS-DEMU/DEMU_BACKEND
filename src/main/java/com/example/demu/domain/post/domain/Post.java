@@ -1,19 +1,13 @@
 package com.example.demu.domain.post.domain;
 
-import com.example.demu.domain.comment.domain.Comment;
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.type.Major;
-import io.lettuce.core.output.StringListOutput;
 import lombok.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.util.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;

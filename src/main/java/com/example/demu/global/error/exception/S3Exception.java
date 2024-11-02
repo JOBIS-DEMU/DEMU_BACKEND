@@ -1,7 +1,5 @@
 package com.example.demu.global.error.exception;
 
-
-
 public class S3Exception extends RuntimeException{
     private final ErrorCode errorCode;
 
@@ -17,8 +15,8 @@ public class S3Exception extends RuntimeException{
     @Override
     public String toString() {
         return "S3Exception{" +
-                "errorCode=" + errorCode +
-                ", message=" + errorCode.getMessage() +
-                '}';
+            "errorCode=" + errorCode +
+            ", message=" + errorCode.getMessage() +
+            '}';
     }
 }

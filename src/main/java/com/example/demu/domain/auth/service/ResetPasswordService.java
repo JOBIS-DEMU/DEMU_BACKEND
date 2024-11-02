@@ -4,7 +4,6 @@ import com.example.demu.domain.auth.controller.dto.PasswordRequest;
 import com.example.demu.domain.auth.facade.UserFacade;
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.domain.repository.UserRepository;
-import com.example.demu.global.security.auth.AuthDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

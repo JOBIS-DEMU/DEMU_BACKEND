@@ -1,9 +1,9 @@
-package com.example.demu;
+package JavaProject.Dayoung;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemuApplicationTests {
+class DayoungApplicationTests {
 
 }

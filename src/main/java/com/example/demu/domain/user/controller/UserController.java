@@ -10,7 +10,6 @@ import com.example.demu.domain.user.service.GetMyPageService;
 import com.example.demu.domain.user.service.UpdateIntroService;
 import com.example.demu.domain.user.service.UpdateMajorService;
 import com.example.demu.domain.user.service.UpdateNicknameService;
-import com.example.demu.infra.service.S3ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +56,4 @@ public class UserController {
     public void updateProfile(@Valid @RequestParam("image") MultipartFile image){
         profileImageUploadService.execute(image);
     }
-
-
 }
