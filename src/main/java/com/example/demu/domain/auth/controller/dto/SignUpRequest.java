@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class SignUpRequest {
 
     @NotBlank(message = "accountId 는 null 이거나 공백, 뛰어쓰기를 허용하지 않습니다.")//이메일
-    @Size(min = 3, max = 20,message = "accountId 는 3글자 이상 20글자 이하여야 합니다.")
+    @Size(max = 30,message = "accountId 30글자 이하여야 합니다.")
     @Email
     private String accountId;
 
