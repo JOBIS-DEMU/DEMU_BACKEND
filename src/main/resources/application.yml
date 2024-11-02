@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://3.37.60.43:3306/demu
-    username: root
-    password: "070211"
     driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username:  ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
