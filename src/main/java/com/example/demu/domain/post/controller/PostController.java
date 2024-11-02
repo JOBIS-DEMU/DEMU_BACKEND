@@ -31,7 +31,7 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
-    public void createPost(@RequestParam @Valid CreatePostRequest request,@RequestParam("iamges") List<MultipartFile> images){
+    public void createPost(@RequestPart("post") @Valid CreatePostRequest request,@RequestPart("iamges") List<MultipartFile> images){
         createPostService.createPost(request, images);
     }
 
