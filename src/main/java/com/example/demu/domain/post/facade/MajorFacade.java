@@ -3,7 +3,6 @@ package com.example.demu.domain.post.facade;
 import com.example.demu.domain.user.domain.type.Major;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 @Service

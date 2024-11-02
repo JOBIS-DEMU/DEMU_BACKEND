@@ -6,7 +6,6 @@ import com.example.demu.domain.post.domain.repository.PostRepository;
 import com.example.demu.domain.post.facade.MajorFacade;
 import com.example.demu.domain.user.domain.type.Major;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 

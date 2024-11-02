@@ -6,7 +6,7 @@ import com.example.demu.domain.user.domain.User;
 import com.example.demu.domain.user.exception.UserNotFoundException;
 import com.example.demu.domain.user.domain.repository.UserRepository;
 import com.example.demu.global.security.TokenResponse;
-import com.example.demu.global.security.jwt.JwtProvider;
+import com.example.demu.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class SignInService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtProvider jwtProvider;
+    private final JwtTokenProvider jwtProvider;
 
     public TokenResponse signIn(SignInRequest request) {
         User user = userRepository.findByAccountId(request.getAccountId()) .orElseThrow(() -> UserNotFoundException.EXCEPTION);

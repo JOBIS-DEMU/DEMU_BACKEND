@@ -5,14 +5,12 @@ import com.example.demu.domain.post.facade.PostFacade;
 import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.post.domain.repository.PostRepository;
 import com.example.demu.domain.post.exception.CannotModifyPostException;
-import com.example.demu.domain.post.facade.PostFacade;
 import com.example.demu.domain.user.domain.User;
 import com.example.demu.infra.service.S3ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor

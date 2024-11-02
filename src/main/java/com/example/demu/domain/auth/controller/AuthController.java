@@ -10,16 +10,15 @@ import com.example.demu.domain.auth.service.*;
 import com.example.demu.global.security.TokenResponse;
 import com.example.demu.global.security.jwt.JwtProperties;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/public")
 public class AuthController {
 
     private final SignUpService signUpService;
@@ -29,20 +28,25 @@ public class AuthController {
     private final ReissueService reissueService;
     private final ResetPasswordService resetPasswordService;
 
-    @PostMapping("/public/signup")
+    @GetMapping
+    public String test() {
+        return "test";
+    }
+
+    @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public TokenResponse SignUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         return signUpService.execute(signUpRequest);
     }
 
-    @PostMapping("/public/signin")
+    @PostMapping("/signin")
     @ResponseStatus(HttpStatus.OK)
     public TokenResponse signin(@RequestBody @Valid SignInRequest signInRequest) {
         return signInService.signIn(signInRequest);
     }
 
 
-    @PostMapping("/password/validate")
+    @PostMapping("/validate")
     public void validatePassword(@RequestBody PasswordRequest passwordRequest) {
         userFacade.validatePassword(passwordRequest.getPassword());
     }
@@ -57,10 +61,8 @@ public class AuthController {
         resetPasswordService.resetPassword(resetPasswordRequest);
     }
 
-    @PatchMapping("public/token/reissue")
+    @PatchMapping("/token/reissue")
     public TokenResponse reissue(HttpServletRequest request) {
         return reissueService.reissue(request);
     }
-
-
 }

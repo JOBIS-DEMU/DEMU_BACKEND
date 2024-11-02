@@ -1,11 +1,10 @@
 package com.example.demu.global.error.exception;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class DemuException extends RuntimeException {
     private final ErrorCode errorCode;
 }

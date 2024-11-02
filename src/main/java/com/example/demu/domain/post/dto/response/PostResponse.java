@@ -1,6 +1,5 @@
 package com.example.demu.domain.post.dto.response;
 
-import com.example.demu.domain.comment.service.GetAllCommentService;
 import com.example.demu.domain.post.domain.Post;
 import com.example.demu.domain.user.domain.type.Grade;
 import com.example.demu.domain.user.domain.type.Major;

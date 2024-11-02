@@ -4,16 +4,13 @@ import com.example.demu.domain.post.dto.request.CreatePostRequest;
 import com.example.demu.domain.post.dto.request.UpdatePostRequest;
 import com.example.demu.domain.post.dto.response.PostResponse;
 import com.example.demu.domain.post.service.*;
-import com.example.demu.domain.post.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import javax.validation.Valid;
-import java.util.List;
 
 
 @RequestMapping("/post")
