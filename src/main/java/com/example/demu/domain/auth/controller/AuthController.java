@@ -33,7 +33,7 @@ public class AuthController {
         return "test";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/aa")
     @ResponseStatus(HttpStatus.CREATED)
     public TokenResponse SignUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         return signUpService.execute(signUpRequest);

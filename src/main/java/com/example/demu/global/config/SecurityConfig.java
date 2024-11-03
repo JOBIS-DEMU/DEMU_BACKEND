@@ -1,6 +1,9 @@
 package com.example.demu.global.config;
 
 import com.example.demu.global.error.GlobalExceptionFilter;
+import com.example.demu.global.security.jwt.JwtFilter;
+import com.example.demu.global.security.jwt.JwtProvider;
+import com.example.demu.global.security.jwt.JwtReissueUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +25,7 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtProvider jwtTokenProvider;
     private final JwtReissueUtil jwtReissueUtil;
     private final ObjectMapper objectMapper;
 
@@ -49,8 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
 
                 .and()
-                .addFilterBefore(new JwtTokenFilter(jwtTokenProvider, jwtReissueUtil), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new GlobalExceptionFilter(objectMapper), JwtTokenFilter.class);
+                .addFilterBefore(new JwtFilter(jwtTokenProvider, jwtReissueUtil), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new GlobalExceptionFilter(objectMapper), JwtFilter.class);
     }
 
     @Bean

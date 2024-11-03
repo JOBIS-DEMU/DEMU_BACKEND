@@ -1,9 +1,8 @@
 package com.example.demu.global.security.jwt;
 
+import com.example.demu.global.exception.JwtSigningException;
 import com.example.demu.global.security.TokenResponse;
-import com.example.demu.global.security.auth.AuthDetail;
-import com.example.demu.global.security.auth.AuthDetailSerivce;
-import com.example.demu.global.security.exception.JwtSigningException;
+import com.example.demu.global.security.auth.AuthDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class JwtReissueUtil {
     public final JwtProperties jwtProperties;
     public final JwtProvider jwtProvider;
-    public final AuthDetailSerivce authDetailSerivce;
+    public final AuthDetailsService authDetailSerivce;
 
     //엑세스 토큰 재발행
     //파라미터로 들어오는 refreshToken은 파싱되지 않은 token

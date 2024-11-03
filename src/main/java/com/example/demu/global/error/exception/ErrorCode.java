@@ -1,5 +1,6 @@
 package com.example.demu.global.error.exception;
 
+import com.example.demu.global.exception.JwtSigningException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -36,7 +37,9 @@ public enum ErrorCode {
     INVALID_TOKEN(403, "Invalid token"),
 
     COMMENT_NOT_FOUND(404, "Comment Not Found"),
-    CANNOT_DELETE_COMMENT(403, "Not Delete Comment");
+    CANNOT_DELETE_COMMENT(403, "Not Delete Comment"),
+
+    JwtSigningException(403,"JWT Signing Exception");
 
     private final int status;
     private final String message;

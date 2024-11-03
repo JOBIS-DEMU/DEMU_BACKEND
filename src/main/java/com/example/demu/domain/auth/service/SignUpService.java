@@ -8,6 +8,8 @@ import com.example.demu.domain.user.domain.repository.UserRepository;
 import com.example.demu.domain.user.domain.type.Grade;
 import com.example.demu.domain.user.domain.type.Major;
 import com.example.demu.global.security.TokenResponse;
+import com.example.demu.global.security.jwt.JwtProvider;
+import com.example.demu.global.security.jwt.JwtReissueUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SignUpService {
 
     private final JwtReissueUtil jwtReissueUtil;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtProvider jwtTokenProvider;
     private final UserFacade userFacade;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
