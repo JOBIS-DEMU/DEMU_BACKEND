@@ -1,9 +1,9 @@
 package com.example.demu.domain.search.service;
 
 
-import com.example.demu.domain.post.domain.Post;
-import com.example.demu.domain.post.domain.repository.PostRepository;
-import com.example.demu.domain.post.facade.MajorFacade;
+//import com.example.demu.domain.post.domain.Post;
+//import com.example.demu.domain.post.domain.repository.PostRepository;
+//import com.example.demu.domain.post.facade.MajorFacade;
 import com.example.demu.domain.user.domain.type.Major;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class SearchService {
-    private final PostRepository postRepository;
+  /*  private final PostRepository postRepository;
     private final MajorFacade majorFacade;
 
     private Specification<Post> titleContains(String keyword){
@@ -47,5 +47,5 @@ public class SearchService {
         return Optional.ofNullable(postRepository.findAll(majorContains(majorFacade.findByName(strMajor))));
     }
 
-
+*/
 }
