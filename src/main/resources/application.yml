@@ -20,6 +20,8 @@ spring:
       level:
         org.hibernate.SQL: DEBUG
         org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+        root: DEBUG
+        com.yourpackage: DEBUG
 
   jackson:
     property-naming-strategy: SNAKE_CASE

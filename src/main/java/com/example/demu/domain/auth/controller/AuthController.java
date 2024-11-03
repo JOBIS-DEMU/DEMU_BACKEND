@@ -36,7 +36,9 @@ public class AuthController {
     @PostMapping("/aa")
     @ResponseStatus(HttpStatus.CREATED)
     public TokenResponse SignUp(@RequestBody @Valid SignUpRequest signUpRequest) {
+        System.out.println("1111111111111111111111111");
         return signUpService.execute(signUpRequest);
+
     }
 
     @PostMapping("/signin")
