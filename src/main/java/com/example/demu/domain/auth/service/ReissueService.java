@@ -2,8 +2,6 @@ package com.example.demu.domain.auth.service;
 
 import com.example.demu.global.security.TokenResponse;
 import com.example.demu.global.security.jwt.JwtProperties;
-import com.example.demu.global.security.jwt.JwtReissueUtil;
-import com.example.demu.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

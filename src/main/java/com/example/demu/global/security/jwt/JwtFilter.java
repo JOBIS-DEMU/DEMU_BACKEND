@@ -3,6 +3,7 @@ package com.example.demu.global.security.jwt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -12,24 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RequiredArgsConstructor
-public class JwtTokenFilter extends OncePerRequestFilter {
-
-    private final JwtTokenProvider jwtTokenProvider;
-    private final JwtReissueUtil jwtReissueUtil;
+@Service
+public class JwtFilter extends OncePerRequestFilter {
+private final JwtProvider jwtProvider;
+private final JwtReissueUtil jwtReissueUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        // 헤더에서 JWT 를 받아옵니다.
-        String token = jwtTokenProvider.resolveToken(request);
-        // 유효한 토큰인지 확인합니다.
+        //헤더에서 jwt 받아와서 접두사 제거하기
+
+        String token = jwtProvider.resolveToken(request);
+
+        //헤더에 토큰이 있었는지
         if (token != null) {
-            jwtTokenProvider.validateToken(token);
-            // 토큰이 유효하면 토큰으로부터 유저 정보를 받아옵니다.
+            //jwt 만료되었는지 검증하기
+            jwtProvider.ValidateToken(token);
+            //security context 에 추가하기
             Authentication authentication = jwtReissueUtil.getAuthentication(token);
-            // SecurityContext 에 Authentication 객체를 저장합니다.
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(request,response);
     }
 }
