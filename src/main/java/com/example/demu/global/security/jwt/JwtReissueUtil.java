@@ -1,68 +1,71 @@
 package com.example.demu.global.security.jwt;
 
-import com.example.demu.global.exception.ExpiredTokenException;
-import com.example.demu.global.exception.InvalidTokenException;
+import com.example.demu.global.exception.JwtSigningException;
 import com.example.demu.global.security.TokenResponse;
 import com.example.demu.global.security.auth.AuthDetailsService;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class JwtReissueUtil {
+    public final JwtProperties jwtProperties;
+    public final JwtProvider jwtProvider;
+    public final AuthDetailsService authDetailSerivce;
 
-    private final JwtTokenProvider jwtTokenProvider;
-    private final JwtProperties jwtProperties;
-    private final AuthDetailsService authDetailsService;
-
-    public TokenResponse reissue(String refreshToken) {
-
-        if (!isRefreshToken(refreshToken)) {
-            throw InvalidTokenException.EXCEPTION;
+    //엑세스 토큰 재발행
+    //파라미터로 들어오는 refreshToken은 파싱되지 않은 token
+    public TokenResponse reissueAccessToken(String refreshToken) {
+        //리프레시 토큰인지 확인
+        if(!(isRefreshToken(refreshToken))){
+            throw new JwtException("is not refreshToken");
         }
 
-        String accountId = getId(refreshToken);
+        String accountId = getTokenAccountId(refreshToken);
 
-        return TokenResponse.builder()
-                .accessToken(jwtTokenProvider.createAccessToken(accountId))
-                .refreshToken(refreshToken)
-                .build();
+            return TokenResponse.builder()
+                    .accessToken(jwtProvider.createAccessToken(accountId))
+                    .refreshToken(refreshToken)
+                    .build();
     }
 
-    private String getId(String token) {
-        return getClaims(token).getSubject();
-    }
 
-    private Claims getClaims(String token) {
+    //토큰파싱하고 페이로드부분 돌려주기
+    public Claims getPayload(String token) {
         try {
-            return Jwts
-                    .parser()
+            return Jwts.parser()
                     .setSigningKey(jwtProperties.getSecretKey())
                     .parseClaimsJws(token)
                     .getBody();
-        } catch (ExpiredJwtException e) {
-            throw ExpiredTokenException.EXCEPTION;
-        } catch (Exception e) {
-            throw InvalidTokenException.EXCEPTION;
+        }catch (Exception e){
+            throw new JwtSigningException();
         }
+
     }
 
-    private boolean isRefreshToken(String token) {
-        return getClaims(token).get("type").equals("refresh");
+    //클래임 받아서 리프레시 토큰인지 확인
+    public boolean isRefreshToken(String refreshToken) {
+        return getPayload(refreshToken).get("type").equals("refresh");
     }
+
+    public String getTokenAccountId(String token) {
+        return getPayload(token).getSubject();
+    }
+
 
     public Authentication getAuthentication(String token) {
-        Claims claims = getClaims(token);
-        UserDetails userDetails = authDetailsService.loadUserByUsername(claims.getSubject());
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        Claims claims = getPayload(token);
+        UserDetails userDetails = authDetailSerivce.loadUserByUsername(claims.getSubject());
+        System.out.println("accountId : "+claims.getSubject());
+
+        return new UsernamePasswordAuthenticationToken(userDetails,"",userDetails.getAuthorities());
     }
+
+
 }

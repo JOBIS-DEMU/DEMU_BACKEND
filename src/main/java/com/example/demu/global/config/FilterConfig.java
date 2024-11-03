@@ -1,9 +1,9 @@
 package com.example.demu.global.config;
 
 import com.example.demu.global.error.GlobalExceptionFilter;
+import com.example.demu.global.security.jwt.JwtFilter;
+import com.example.demu.global.security.jwt.JwtProvider;
 import com.example.demu.global.security.jwt.JwtReissueUtil;
-import com.example.demu.global.security.jwt.JwtTokenFilter;
-import com.example.demu.global.security.jwt.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -14,17 +14,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class FilterConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtProvider jwtTokenProvider;
     private final ObjectMapper objectMapper;
     private final JwtReissueUtil jwtReissueUtil;
 
     @Override
     public void configure(HttpSecurity http) {
 
-        JwtTokenFilter jwtTokenFilter = new JwtTokenFilter(jwtTokenProvider, jwtReissueUtil);
+        JwtFilter jwtTokenFilter = new JwtFilter(jwtTokenProvider, jwtReissueUtil);
         GlobalExceptionFilter globalExceptionFilter = new GlobalExceptionFilter(objectMapper);
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(globalExceptionFilter, JwtTokenFilter.class);
+                .addFilterBefore(globalExceptionFilter, JwtFilter.class);
     }
 }
