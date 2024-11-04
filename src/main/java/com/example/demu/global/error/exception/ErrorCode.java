@@ -11,6 +11,8 @@ public enum ErrorCode {
 
     USER_NOT_FOUND(404, "User Not Found"),
     PASSWORD_MISMATCH(401, "Password Mismatch"),
+    NICKNAME_ALREADY_EXISTS(409, "Nickname Already Exists"),
+    ACCOUNTID_ALREADY_EXISTS(409, "AccountId Already Exists"),
 
     POST_NOT_FOUND(404, "Post Not Found"),
     CANNOT_MODIFY_POST(403, "Cannot Modify Post"),
