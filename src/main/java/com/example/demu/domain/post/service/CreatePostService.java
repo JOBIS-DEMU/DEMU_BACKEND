@@ -25,7 +25,7 @@ public class CreatePostService {
 
         User user = userFacade.CurrentUser();
 
-        List<String> imagesToString = (List<String>) images.stream().map(s3ImageService::upload);
+        List<String> imagesToString = images.stream().map(s3ImageService::upload).toList();
 
         postRepository.save(Post.builder()
                 .user(user)

@@ -18,6 +18,10 @@ public enum ErrorCode {
     NO_FILE_EXTENTION(400, "No File Extension"),
     INVALID_FILE_EXTENTION(400, "Invalid File Extension"),
 
+    //jwt 관련 에외
+    ACCOUNTID_ALREADY_EXISTS(409, "Account ID Already Exists"),
+    NICKNAME_ALREADY_EXISTS(409, "Nickname Already Exists"),
+
     // S3 업로드 관련 예외
     IO_EXCEPTION_ON_IMAGE_UPLOAD(500, "IO Exception on Image Upload"),
     PUT_OBJECT_EXCEPTION(500, "Failed to Upload Object to S3"),

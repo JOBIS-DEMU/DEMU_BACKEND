@@ -28,6 +28,7 @@ public class SignUpService {
     public TokenResponse execute(SignUpRequest signUpRequest) {
     //최초 유저 생성시 비활성화 해야함 (nullPointerException 뜸)
     userFacade.CheckByaccountId(signUpRequest.getAccountId());
+    userFacade.CheckBynickname(signUpRequest.getNickname());
 
     userRepository.save(
             User.builder()
