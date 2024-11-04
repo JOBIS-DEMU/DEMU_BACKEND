@@ -18,8 +18,9 @@ public class UpdateNicknameService {
 
     public void updateNickname(UpdateNicknameRequest request) {
         User user = userFacade.CurrentUser();
+        userFacade.CheckByNickname(request.getNickname());
 
         user.updateNickname(request.getNickname());
-        userRepository.save(user);
     }
+
 }
